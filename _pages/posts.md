@@ -1,9 +1,9 @@
 ---
 title:  "All posts"
 layout: archive
-permalink: /Blogs/
+permalink: /posts/
 author_profile: true
-comments: true
+comments: false
 ---
 
 Most of my posts are technical blogs written mainly for my own reference. I'd be happy if any of you find them useful too.
