@@ -6,7 +6,7 @@ author_profile: true
 comments: false
 ---
 
-Most of my posts are technical posts written mainly for my own reference. I'd be happy if any of you find them useful too.
+Most of my posts are technical notes written mainly for my own reference. I'd be happy if any of you find them useful too.
 
 
 <ul>
