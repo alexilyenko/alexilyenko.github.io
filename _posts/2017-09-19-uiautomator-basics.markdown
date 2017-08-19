@@ -1,6 +1,6 @@
 ---
 title: "UiAutomator Basics"
-excerpt: "Everything you need to know to start with UiAutomator"
+excerpt: "Everything you need to know to start using UiAutomator"
 comments: true
 overlay_image: /assets/images/uiautomator_basics.jpg
 overlay_filter: 0.5
@@ -26,17 +26,17 @@ On the other hand there is UiAutomator.
 
 Still not convinced? What if I tell you this little tool can help you to build fully functional, extendable and reliable test frameworks? Tempting, isn't it? Stay tuned!
 
-#### Disclaimer
+**Disclaimer**
 We're going to talk about UiAutomator2 since it's the most recent version, which includes all the fixes of the problems UiAutomator(1) had.
 {: .notice}
 
 ## How to get started with UiAutomator?
-#### Android Studio
+### Android Studio
 First of all, you'll need to configure your Android Studio to be able to use support libraries, which include UiAutomator. This can be done in Android Studio settings under Android SDK panel.
 
 {% include figure image_path="/assets/images/android_support.jpg" alt="how to configure uiautomator" caption="Go to Android Studio Settings, open Android SDK panel and enable Android Support Repository" %}
 
-#### Gradle
+### Gradle
 Next thing we'll need is to set up Gradle. To do that, following changes should be added to `build.gradle` file. 
 
 ```groovy
@@ -52,7 +52,7 @@ dependencies {
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
 }
 ```
-Since other settings in the file depend on your app and and what it's built for, they are up to you. But these two lines must be included into `build.gradle` in order to use UiAutomator in your project.
+Since other settings in the file depend on your app and what it's built for, they are up to you. But these two lines must be included into `build.gradle` in order to use UiAutomator in your project.
 
 That's basically it! It wasn't difficult, right? You're ready to start writing you first test.
 
@@ -84,13 +84,13 @@ UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentatio
 device.pressBack();
 ```
 
-* **[Until](https://developer.android.com/reference/android/support/test/uiautomator/Until.html)** - utility class for constructing common conditions used for searching and waiting for elements (i.e. [SearchCondition](https://developer.android.com/reference/android/support/test/uiautomator/SearchCondition.html) and [UiObject2Condition](https://developer.android.com/reference/android/support/test/uiautomator/UiObject2Condition.html), which were prototyped from Selenium's `ExpectedConditions`). I'm going to write a post about these and Waiting in UiAutomator next week. 
+* **[Until](https://developer.android.com/reference/android/support/test/uiautomator/Until.html)** - utility class for constructing common conditions used for searching and waiting for elements (i.e. [SearchCondition](https://developer.android.com/reference/android/support/test/uiautomator/SearchCondition.html) and [UiObject2Condition](https://developer.android.com/reference/android/support/test/uiautomator/UiObject2Condition.html), which were prototyped from Selenium's `ExpectedConditions`). I'm going to write a post about conditions and waits in UiAutomator next week. Stay tuned!
 
 ```java
 long timeout = 10000L;
 device.wait(Until.gone(By.text("foo")), timeout)
 ```
-* **[Configurator](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html)** - from the name of the class you could easily get that it's main purpose is to configure your UiAutomator test runner. For example I use it to remove implicit timeouts of UiAutomator, because I like to decide whenever to wait for events or not by myself. But of course it's up to you.
+* **[Configurator](https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html)** - from the name of the class you could easily get that its main purpose is to configure your UiAutomator test runner. For example I use it to remove implicit timeouts of UiAutomator, because I like to decide whenever to wait for events or not by myself. But of course it's up to you.
 
 ```java
 Configurator configurator = Configurator.getInstance();
@@ -98,7 +98,7 @@ long timeout = 0L;
 configurator.setWaitForSelectorTimeout(timeout);
 ```
 
-These are most common classes in UiAutomator library. But there are others, which can be useful in building your automated test framework. You can check them out in the [official documentation](https://developer.android.com/reference/android/support/test/uiautomator/package-summary.html).
+These are the most common classes in UiAutomator library. But there are others, which might be useful in building your automated test framework. You can check them out in the [official documentation](https://developer.android.com/reference/android/support/test/uiautomator/package-summary.html).
 
 ## UiAutomator test example
 Since you already know about main classes in the library let's find out how to use them in your tests.
