@@ -1,6 +1,6 @@
 ---
 title: "UiAutomator Basics"
-excerpt: "UiAutomator Basics"
+excerpt: "What you need to know to start with UiAutomator?"
 comments: true
 date: 2017-08-19
 categories:
