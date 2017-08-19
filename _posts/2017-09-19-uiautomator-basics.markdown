@@ -2,9 +2,10 @@
 title: "UiAutomator Basics"
 excerpt: "Everything you need to know to start using UiAutomator"
 comments: true
+related: true
 header:
     overlay_image: /assets/images/uiautomator_basics.jpg
-    overlay_filter: 0.5
+    overlay_filter: 0.25
 date: 2017-08-19
 categories:
   - android
@@ -15,8 +16,7 @@ tags:
 ---
 
 
-
-
+{% include toc title="UiAutomator Basics" icon="file-text" %}
 ## Why UiAutomator?
 Time to time my colleagues from other departments ask me about framework I'm using for automating UI tests on Android and AndroidTV devices. And they really wonder when I tell them I'm using **UiAutomator** for those purposes. Not because they think it's not appropriate solution for their tasks, but rather because they haven't even heard about this kind of framework.
 
@@ -27,9 +27,8 @@ On the other hand there is UiAutomator.
 
 Still not convinced? What if I tell you this little tool can help you to build fully functional, extendable and reliable test frameworks? Tempting, isn't it? Stay tuned!
 
-**Disclaimer**
-We're going to talk about UiAutomator2 since it's the most recent version, which includes all the fixes of the problems UiAutomator(1) had.
-{: .notice}
+**Disclaimer:** We're going to talk about UiAutomator2 since it's the most recent version, which includes all the fixes of the problems UiAutomator(1) had.
+{: .notice--info}
 
 ## How to get started with UiAutomator?
 ### Android Studio
