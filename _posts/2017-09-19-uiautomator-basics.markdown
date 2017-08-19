@@ -1,6 +1,5 @@
 ---
 title: "UiAutomator Basics"
-excerpt: "UiAutomator Basics"
 comments: true
 date: 2017-08-19
 categories:

@@ -4,6 +4,7 @@ permalink: /about/
 author_profile: true
 ---
 
+{% include figure image_path="/assets/images/big_avatar.jpg" alt="Alex Ilyenko" align=right%}
 Hey everyone! My name is Alex.
 Currently I'm working as a SDET at NBCUniversal company in New York city. My job responsibilities are related to automation, testing and continuous integration. 
 
