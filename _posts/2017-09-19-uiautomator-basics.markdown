@@ -5,7 +5,7 @@ comments: true
 related: true
 header:
     overlay_image: /assets/images/uiautomator_basics.jpg
-    overlay_filter: 0.75
+    overlay_filter: 0.25
 date: 2017-08-19
 categories:
   - android
@@ -15,8 +15,8 @@ tags:
   - uiautomator
 ---
 
-{% include toc title="UiAutomator Basics" icon="file-text" %}
 ## Why UiAutomator?
+{% include toc title="UiAutomator Basics" icon="file-text" %}
 Time to time my colleagues from other departments ask me about framework I'm using for automating UI tests on Android and AndroidTV devices. And they really wonder when I tell them I'm using **UiAutomator** for those purposes. Not because they think it's not appropriate solution for their tasks, but rather because they haven't even heard about this kind of framework.
 
 From my side it's odd to hear that. No, don't get me wrong, I know about all those fancy frameworks like Appium, Espresso, Robotium etc (and we'll talk about them in my further posts). But let's face the truth - most of the functionality these instruments provide you'll never use, and to support them you'll have to have whole team of automation engineers. And that's expensive, right?
