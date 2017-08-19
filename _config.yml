@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en"
-title                    : "Alex Ilyenko"
+title                    : "Alex Ilyenko's Blog"
 title_separator          : "-"
 name                     : "Alex Ilyenko"
 description              : "SDET's Blog"

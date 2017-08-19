@@ -5,12 +5,13 @@ date: 2017-08-19
 categories:
   - android
 header:
-  image: /assets/images/uiautomator_basics.jpg
+  overlay_image: /assets/images/uiautomator_basics.jpg
 tags:
   - testing
   - android
   - uiautomator
 ---
+
 
 ## Why UiAutomator?
 Time to time my colleagues from other departments ask me about framework I'm using for automating UI tests on Android and AndroidTV devices. And they really wonder when I tell them I'm using **UiAutomator** for those purposes. Not because they think it's not appropriate solution for their tasks, but rather because they haven't even heard about this kind of framework.
