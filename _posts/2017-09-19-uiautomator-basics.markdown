@@ -5,7 +5,7 @@ comments: true
 related: true
 header:
     overlay_image: /assets/images/uiautomator_basics.jpg
-    overlay_filter: 0.25
+    overlay_filter: 0.75
 date: 2017-08-19
 categories:
   - android
@@ -14,7 +14,6 @@ tags:
   - android
   - uiautomator
 ---
-
 
 {% include toc title="UiAutomator Basics" icon="file-text" %}
 ## Why UiAutomator?
@@ -27,7 +26,7 @@ On the other hand there is UiAutomator.
 
 Still not convinced? What if I tell you this little tool can help you to build fully functional, extendable and reliable test frameworks? Tempting, isn't it? Stay tuned!
 
-**Disclaimer:** We're going to talk about UiAutomator2 since it's the most recent version, which includes all the fixes of the problems UiAutomator(1) had.
+**Disclaimer:** we're going to talk about UiAutomator2 since it's the most recent version, which includes all the fixes of the problems UiAutomator(1) had.
 {: .notice--info}
 
 ## How to get started with UiAutomator?
