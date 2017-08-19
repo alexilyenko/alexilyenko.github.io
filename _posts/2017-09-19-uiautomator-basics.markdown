@@ -2,8 +2,9 @@
 title: "UiAutomator Basics"
 excerpt: "Everything you need to know to start using UiAutomator"
 comments: true
-overlay_image: /assets/images/uiautomator_basics.jpg
-overlay_filter: 0.5
+header:
+    overlay_image: /assets/images/uiautomator_basics.jpg
+    overlay_filter: 0.5
 date: 2017-08-19
 categories:
   - android
