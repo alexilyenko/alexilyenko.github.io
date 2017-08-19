@@ -6,6 +6,8 @@ date: 2017-08-19
 categories:
   - Android
   - UiAutomator
+header:
+  overlay_image: /assets/images/uiautomator_basics.jpg
 tags:
   - testing
   - android

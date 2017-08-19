@@ -5,7 +5,7 @@ author_profile: true
 ---
 
 Hey everyone! My name is Alex.
-Currently I'm working as a SDET at NBCUniversal company. My job responsibilities are related to automation, testing and continuous integration. 
+Currently I'm working as a SDET at NBCUniversal company in New York city. My job responsibilities are related to automation, testing and continuous integration. 
 
 I am passionate about clean code and best practices of development.  Also I'm considering myself early adopter of technologies and big fan of optimizations. 
 
