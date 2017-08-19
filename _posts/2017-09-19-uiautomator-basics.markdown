@@ -3,14 +3,13 @@ title: "UiAutomator Basics"
 comments: true
 date: 2017-08-19
 categories:
-  - Android
-  - UiAutomator
+  - android
 header:
-  overlay_image: /assets/images/uiautomator_basics.jpg
+  image: /assets/images/uiautomator_basics.jpg
 tags:
   - testing
   - android
-  - framework
+  - uiautomator
 ---
 
 ## Why UiAutomator?
@@ -132,15 +131,19 @@ public class SimpleTest {
         // Disabling waiting for selector implicit timeout
         Configurator.getInstance().setWaitForSelectorTimeout(0);
         // Initializing UiDevice instance
-        device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        device = UiDevice.getInstance(InstrumentationRegistry
+                                .getInstrumentation());
 
         // Starting the app
-        Context context = InstrumentationRegistry.getInstrumentation().getContext();
-        Intent intent = context.getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME);
+        Context context = InstrumentationRegistry.getInstrumentation()
+                                .getContext();
+        Intent intent = context.getPackageManager()
+                                .getLaunchIntentForPackage(PACKAGE_NAME);
         context.startActivity(intent);
 
         // Waiting for app activity to appear
-        device.wait(Until.hasObject(By.pkg(PACKAGE_NAME).depth(0)), DEFAULT_TIMEOUT);
+        device.wait(Until
+                .hasObject(By.pkg(PACKAGE_NAME).depth(0)), DEFAULT_TIMEOUT);
     }
 
     @Test
@@ -152,7 +155,8 @@ public class SimpleTest {
 
         // Waiting for element
         BySelector submitButtonSelector = By.text("submit");
-        UiObject2 submitButton = device.wait(Until.findObject(submitButtonSelector), DEFAULT_TIMEOUT);
+        UiObject2 submitButton = device.wait(Until
+                .findObject(submitButtonSelector), DEFAULT_TIMEOUT);
         // Clicking on element
         submitButton.click();
 
