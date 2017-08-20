@@ -103,24 +103,6 @@ Since you already know about main classes in the library let's find out how to u
 Here is the code snippet of the simple test script.
 
 ```java
-import android.content.Context;
-import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.BySelector;
-import android.support.test.uiautomator.Configurator;
-import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject2;
-import android.support.test.uiautomator.Until;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import java.io.File;
-
 @RunWith(AndroidJUnit4.class)
 public class SimpleTest {
 
