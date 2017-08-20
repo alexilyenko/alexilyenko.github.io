@@ -10,9 +10,9 @@ date: 2017-08-19
 categories:
   - android
 tags:
+  - uiautomator
   - testing
   - android
-  - uiautomator
 ---
 {% include toc title="UiAutomator Basics" icon="file-text" %}
 ## Why UiAutomator?
