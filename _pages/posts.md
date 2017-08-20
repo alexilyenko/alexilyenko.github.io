@@ -1,13 +1,10 @@
 ---
-title:  "All posts"
+title:  "Recent Posts"
 layout: archive
 permalink: /
 author_profile: true
 comments: false
 ---
-
-Most of my posts are technical notes written mainly for my own reference. I'd be happy if any of you find them useful too.
-
 
 <ul>
   {% for post in site.posts %}

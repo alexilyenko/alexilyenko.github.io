@@ -1,5 +1,3 @@
 main:
-  - title: "All posts"
-    url: /posts/
   - title: "About me"
     url:  /about/
