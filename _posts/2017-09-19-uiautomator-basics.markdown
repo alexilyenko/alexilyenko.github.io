@@ -7,8 +7,6 @@ header:
     overlay_image: /assets/images/uiautomator_basics.jpg
     overlay_filter: 0.25
 date: 2017-08-19
-categories:
-  - android
 tags:
   - uiautomator
   - testing
