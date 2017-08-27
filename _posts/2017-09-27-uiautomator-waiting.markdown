@@ -21,9 +21,9 @@ Waiting is an essential technique to build fast, reliable and efficient automati
 If you're not familiar with UiAutomator, I recommend to read my article on [UiAutomator Essentials](https://alexilyenko.github.io/uiautomator-basics/) first, where I introduced framework's main classes and API.
 {: .notice--info}
 
-## Common conditions
+## Conditions
 Wait methods in UiAutomator look like `wait(Condition condition, long timeout)` and are used for, well, waiting for conditions to be fulfilled during given timeout.
-
+### Common conditions
 Most common conditions which might come in handy in every day automation are conveniently gathered in one utility class - `Until`. One can found three actual types of conditions there:
 * **SearchCondition** - a condition which is satisfied by searching for some element by specified selector
 ```java
@@ -53,7 +53,7 @@ Most common conditions which might come in handy in every day automation are con
                  Until.scrollFinished(Direction.UP);
 ```
 
-## Building your own conditions
+### Building your own conditions
 Of course you can build your own conditions if you feel like basic ones are not enough for your. All you need to do is to implement needed interface. For example, here is how I implemented condition which will be fulfilled if resource id of element starts with some prefix:
 ```java
 // Condition will be satisfied if given element
