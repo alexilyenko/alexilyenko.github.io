@@ -1,7 +1,7 @@
 ---
 title: "About"
 permalink: /about/
-author_profile: true
+author_profile: false
 ---
 
 ![image-right]({{ site.url }}{{ site.baseurl }}/assets/images/big_avatar.jpg){: .align-right}
