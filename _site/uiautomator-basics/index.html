@@ -121,7 +121,7 @@
 <p>From my side it’s odd to hear that. No, don’t get me wrong, I’m familiar with all those fancy frameworks like Appium, Espresso, Robotium etc (and we’ll talk about them in my further posts). But let’s face the truth - most of the functionality these instruments provide you’ll never use, and to support them you’ll have to have whole team of automation engineers. And that’s expensive, right?
 <p>On the other hand there is UiAutomator.
 <blockquote>
- <p>UiAutomator is a light-weight, easy-to-learn library, developed by Google to make things done fast, when you don’t want to spend lot’s of time on developing test code and its maintainance.
+ <p>UiAutomator is a light-weight, easy-to-learn library, developed by Google to make things done fast, when you don’t want to spend lot’s of time on developing test code and its maintenance.
 </blockquote>
 <p>Still not convinced? What if I tell you this little tool can help you to build fully functional, extendable and reliable test frameworks? Tempting, isn’t it? Stay tuned!
 <p class="notice--info"><strong>Disclaimer:</strong> we’re going to talk about UiAutomator2 since it’s the most recent version, which includes all the fixes of the problems UiAutomator(1) had.
@@ -153,46 +153,36 @@
 <h2 id="introduction-to-uiautomator-library">Introduction to UiAutomator library</h2>
 <p>As I said before UiAutomator is a light-weight library so you won’t need to learn lots of classes to start using it. Here are the main ones:
 <ul>
- <li><strong><a href="https://developer.android.com/reference/android/support/test/uiautomator/BySelector.html">BySelector</a></strong> - class for specifying criteria for matching UI elements in app UI herarchy. It’s similar to Selenium’s <code class="highlighter-rouge">By</code> class.
-</ul>
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">BySelector</span> <span class="n">selector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BySelector</span><span class="o">().</span><span class="na">text</span><span class="o">(</span><span class="s">"foo"</span><span class="o">);</span>
+ <li><strong><a href="https://developer.android.com/reference/android/support/test/uiautomator/BySelector.html">BySelector</a></strong> - class for specifying criteria for matching UI elements in app UI hierarchy. It’s similar to Selenium’s <code class="highlighter-rouge">By</code> class.
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">BySelector</span> <span class="n">selector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BySelector</span><span class="o">().</span><span class="na">text</span><span class="o">(</span><span class="s">"foo"</span><span class="o">);</span>
 </code></pre>
-</div>
-<ul>
- <li><strong><a href="https://developer.android.com/reference/android/support/test/uiautomator/By.html">By</a></strong> - utility class for providing static factory methods for constructing <code class="highlighter-rouge">BySelector</code>s using a shortened syntax. Folowing line brings the same meaning as <code class="highlighter-rouge">new BySelector().text("foo")</code>:
-</ul>
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">BySelector</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">By</span><span class="o">.</span><span class="na">text</span><span class="o">(</span><span class="s">"foo"</span><span class="o">);</span>
+   </div>
+ <li><strong><a href="https://developer.android.com/reference/android/support/test/uiautomator/By.html">By</a></strong> - utility class for providing static factory methods for constructing <code class="highlighter-rouge">BySelector</code>s using a shortened syntax. Following line brings the same meaning as <code class="highlighter-rouge">new BySelector().text("foo")</code>:
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">BySelector</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">By</span><span class="o">.</span><span class="na">text</span><span class="o">(</span><span class="s">"foo"</span><span class="o">);</span>
 </code></pre>
-</div>
-<ul>
+   </div>
  <li><strong><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject2.html">UiObject2</a></strong> - one of the most important classes in UiAutomator library. It represents UI element in Android app hierarchy. It’s similar to Selenium’s <code class="highlighter-rouge">WebElement</code> or Appium’s <code class="highlighter-rouge">MobileElement</code>. You can do lots of things with it (for example read and verify element’s attributes, click on it, wait for it, look for inner elements and many more).
-</ul>
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">UiObject2</span> <span class="n">element</span> <span class="o">=</span> <span class="n">device</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">text</span><span class="o">(</span><span class="s">"foo"</span><span class="o">));</span>
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">UiObject2</span> <span class="n">element</span> <span class="o">=</span> <span class="n">device</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">text</span><span class="o">(</span><span class="s">"foo"</span><span class="o">));</span>
 <span class="n">element</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
 </code></pre>
-</div>
-<ul>
- <li><strong><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html">UiDevice</a></strong> - another important class for building successfull UI test framework. It represents the device itself - either Android Phone, TV or even Watch. With its help you can find elements, wait for them, press device’s system buttons and even control remote in case of Android TV devices. Its Selenium equivalent would be <code class="highlighter-rouge">WebDriver</code>, which I guess is familiar to most of you.
-</ul>
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">UiDevice</span> <span class="n">device</span> <span class="o">=</span> <span class="n">UiDevice</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">InstrumentationRegistry</span><span class="o">.</span><span class="na">getInstrumentation</span><span class="o">());</span>
+   </div>
+ <li><strong><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html">UiDevice</a></strong> - another important class for building successful UI test framework. It represents the device itself - either Android Phone, TV or even Watch. With its help you can find elements, wait for them, press device’s system buttons and even control remote in case of Android TV devices. Its Selenium equivalent would be <code class="highlighter-rouge">WebDriver</code>, which I guess is familiar to most of you.
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">UiDevice</span> <span class="n">device</span> <span class="o">=</span> <span class="n">UiDevice</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">InstrumentationRegistry</span><span class="o">.</span><span class="na">getInstrumentation</span><span class="o">());</span>
 <span class="n">device</span><span class="o">.</span><span class="na">pressBack</span><span class="o">();</span>
 </code></pre>
-</div>
-<ul>
- <li><strong><a href="https://developer.android.com/reference/android/support/test/uiautomator/Until.html">Until</a></strong> - utility class for constructing common conditions used for searching and waiting for elements (i.e. <a href="https://developer.android.com/reference/android/support/test/uiautomator/SearchCondition.html">SearchCondition</a> and <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject2Condition.html">UiObject2Condition</a>, which were prototyped from Selenium’s <code class="highlighter-rouge">ExpectedConditions</code>). I’m going to write a post about conditions and waits in UiAutomator next week. Stay tuned!
-</ul>
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kt">long</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">10000L</span><span class="o">;</span>
+   </div>
+ <li><strong><a href="https://developer.android.com/reference/android/support/test/uiautomator/Until.html">Until</a></strong> - utility class for constructing common conditions used for searching and waiting for elements (i.e. <a href="https://developer.android.com/reference/android/support/test/uiautomator/SearchCondition.html">SearchCondition</a> and <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject2Condition.html">UiObject2Condition</a>, which were prototyped from Selenium’s <code class="highlighter-rouge">ExpectedConditions</code>). Check out my recent post about <a href="http://alexilyenko.github.io/uiautomator-waiting/">conditions and waits in UiAutomator</a>.
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kt">long</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">10000L</span><span class="o">;</span>
 <span class="n">device</span><span class="o">.</span><span class="na">wait</span><span class="o">(</span><span class="n">Until</span><span class="o">.</span><span class="na">gone</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">text</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)),</span> <span class="n">timeout</span><span class="o">)</span>
 </code></pre>
-</div>
-<ul>
+   </div>
  <li><strong><a href="https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html">Configurator</a></strong> - from the name of the class you could easily get that its main purpose is to configure your UiAutomator test runner. For example I use it to remove implicit timeouts of UiAutomator, because I like to decide whenever to wait for events or not by myself. But of course it’s up to you.
-</ul>
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Configurator</span> <span class="n">configurator</span> <span class="o">=</span> <span class="n">Configurator</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Configurator</span> <span class="n">configurator</span> <span class="o">=</span> <span class="n">Configurator</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
 <span class="kt">long</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span>
 <span class="n">configurator</span><span class="o">.</span><span class="na">setWaitForSelectorTimeout</span><span class="o">(</span><span class="n">timeout</span><span class="o">);</span>
 </code></pre>
-</div>
+   </div>
+</ul>
 <p>These are the most common classes in UiAutomator library. But there are others, which might be useful in building your automated test framework. You can check them out in the <a href="https://developer.android.com/reference/android/support/test/uiautomator/package-summary.html">official documentation</a>.
 <h2 id="uiautomator-test-example">UiAutomator test example</h2>
 <p>Since you already know about main classes in the library let’s find out how to use them in your tests.
@@ -270,12 +260,31 @@ Here is the code snippet of the simple test script.
   <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fuiautomator-basics%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
   <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fuiautomator-basics%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
+ <nav class="pagination">
+      <a href="#" class="pagination--pager disabled">Previous</a>
+      <a href="http://localhost:4000/uiautomator-waiting/" class="pagination--pager" title="Waiting in UiAutomator
+">Next</a>
+ </nav>
    </div>
      <div class="page__comments">
        <h4 class="page__comments-title">Leave a Comment</h4>
        <section id="disqus_thread"></section>
 </div>
  </article>
+   <div class="page__related">
+     <h4 class="page__related-title">You May Also Enjoy</h4>
+     <div class="grid__wrapper">
+<div class="grid__item">
+ <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+   <h2 class="archive__item-title" itemprop="headline">
+        <a href="http://localhost:4000/uiautomator-waiting/" rel="permalink">Waiting in UiAutomator
+</a>
+   </h2>
+   <p class="archive__item-excerpt" itemprop="description">Advanced technics for building custom waits in UiAutomator
+ </article>
+</div>
+     </div>
+   </div>
 </div>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <div align="center" style="margin: 1em 0;">

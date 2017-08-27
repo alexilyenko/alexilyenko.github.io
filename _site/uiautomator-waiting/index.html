@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en" class="no-js">
+   <meta charset="utf-8">
+<title>Waiting in UiAutomator - Alex Ilyenko’s Blog</title>
+<meta name="description" content="Advanced technics for building custom waits in UiAutomator">
+<meta name="author" content="Alex Ilyenko">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Alex Ilyenko's Blog">
+<meta property="og:title" content="Waiting in UiAutomator">
+<link rel="canonical" href="http://localhost:4000/uiautomator-waiting/">
+ <meta property="og:url" content="http://localhost:4000/uiautomator-waiting/">
+ <meta property="og:description" content="Advanced technics for building custom waits in UiAutomator">
+ <meta name="twitter:site" content="@alexintest">
+ <meta name="twitter:title" content="Waiting in UiAutomator">
+ <meta name="twitter:description" content="Advanced technics for building custom waits in UiAutomator">
+ <meta name="twitter:url" content="http://localhost:4000/uiautomator-waiting/">
+   <meta name="twitter:card" content="summary">
+   <meta name="twitter:creator" content="@Alex Ilyenko">
+ <meta property="og:image" content="http://localhost:4000/assets/images/uiautomator_waits.jpg">
+ <meta property="og:type" content="article">
+ <meta property="article:published_time" content="2017-08-27T00:00:00-04:00">
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Alex Ilyenko",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+ <meta name="google-site-verification" content="pq92TSw2zJ7HAoXWnSYgk_4ybrLvhZVaw_BChV0EcWc" />
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Alex Ilyenko's Blog Feed">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<meta http-equiv="cleartype" content="on">
+ <body class="layout--single">
+   <div class="masthead">
+ <div class="masthead__inner-wrap">
+   <div class="masthead__menu">
+     <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Alex Ilyenko's Blog</a>
+       <ul class="visible-links">
+           <li class="masthead__menu-item"><a href="http://localhost:4000/about/">About me</a>
+       </ul>
+        <button><div class="navicon"></div></button>
+       <ul class="hidden-links hidden"></ul>
+     </nav>
+   </div>
+ </div>
+</div>
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('http://localhost:4000/assets/images/uiautomator_waits.jpg');"
+>
+   <div class="wrapper">
+     <h1 class="page__title" itemprop="headline">
+          Waiting in UiAutomator
+     </h1>
+       <p class="page__lead">Advanced technics for building custom waits in UiAutomator
+   </div>
+</div>
+<div id="main" role="main">
+ <div class="sidebar sticky">
+<div itemscope itemtype="http://schema.org/Person">
+   <div class="author__avatar">
+        <img src="http://localhost:4000/assets/images/avatar.jpg" class="author__avatar" alt="Alex Ilyenko" itemprop="image">
+   </div>
+ <div class="author__content">
+   <h3 class="author__name" itemprop="name">Alex Ilyenko</h3>
+     <p class="author__bio" itemprop="description">
+        Software Engineer in Test
+ </div>
+ <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+   <ul class="author__urls social-icons">
+       <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">New York, NY</span>
+       <li>
+          <a href="mailto:aleksey.ilyenko@gmail.com">
+           <meta itemprop="email" content="aleksey.ilyenko@gmail.com" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+       <li>
+          <a href="https://www.linkedin.com/in/alexilyenko" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+       <li>
+          <a href="https://github.com/alexilyenko" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+   </ul>
+ </div>
+</div>
+ </div>
+ <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+   <meta itemprop="headline" content="Waiting in UiAutomator">
+   <meta itemprop="description" content="Advanced technics for building custom waits in UiAutomator">
+   <meta itemprop="datePublished" content="August 27, 2017">
+   <div class="page__inner-wrap">
+     <section class="page__content" itemprop="text">
+       <aside class="sidebar__right">
+<nav class="toc">
+  <header><h4 class="nav__title"><i class="fa fa-file-text"></i> Waiting in UiAutomator</h4></header>
+<ul class="toc__menu" id="markdown-toc">
+ <li><a href="#why-to-wait" id="markdown-toc-why-to-wait">Why to wait?</a>
+ <li><a href="#common-conditions" id="markdown-toc-common-conditions">Common conditions</a>
+ <li><a href="#building-your-own-conditions" id="markdown-toc-building-your-own-conditions">Building your own conditions</a>
+ <li><a href="#using-waits" id="markdown-toc-using-waits">Using waits</a>
+</ul>
+ </nav>
+</aside>
+<h2 id="why-to-wait">Why to wait?</h2>
+<p>Real-life waiting is hard, and waiting in tests is not an exception. I guess all of us had difficult times, when one test failed just because we forgot about waits. Most of the test engineers use explicit waits in Selenium and similar frameworks and well-aware of their advantages over usual <code class="highlighter-rouge">Thread.sleep()</code>.
+<p>Waiting is an essential technique to build fast, reliable and efficient automation in your projects. UiAutomator is no different. But it could be hard to understand how to use waits with Google’s UI test tool, because of lack of documentation on the Internet. I’ll try to share easy and straightforward approach to waiting for conditions with new classes, introduced in UiAutomator2.
+<p class="notice--info">If you’re not familiar with UiAutomator, I recommend to read my article on <a href="https://alexilyenko.github.io/uiautomator-basics/">UiAutomator Essentials</a> first, where I introduced framework’s main classes and API.
+<h2 id="common-conditions">Common conditions</h2>
+<p>Wait methods in UiAutomator look like <code class="highlighter-rouge">wait(Condition condition, long timeout)</code> and are used for, well, waiting for conditions to be fulfilled during given timeout.
+<p>Most common conditions which might come in handy in every day automation are conveniently gathered in one utility class - <code class="highlighter-rouge">Until</code>. One can found three actual types of conditions there:
+<ul>
+ <li><strong>SearchCondition</strong> - a condition which is satisfied by searching for some element by specified selector
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// until element is available</span>
+<span class="n">SearchCondition</span><span class="o">&lt;</span><span class="n">UiObject2</span><span class="o">&gt;</span> <span class="n">isAvailable</span> <span class="o">=</span>
+               <span class="n">Until</span><span class="o">.</span><span class="na">findObject</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">text</span><span class="o">(</span><span class="s">"foo"</span><span class="o">));</span>
+<span class="c1">// until element is gone</span>
+<span class="n">SearchCondition</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span> <span class="n">isGone</span> <span class="o">=</span>
+               <span class="n">Until</span><span class="o">.</span><span class="na">gone</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">text</span><span class="o">(</span><span class="s">"foo"</span><span class="o">));</span>
+</code></pre>
+   </div>
+ <li><strong>UiObject2Condition</strong> - condition which is satisfied when <code class="highlighter-rouge">UiObject2</code> is in particular state or has specific attribute
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// until element is focused</span>
+<span class="n">UiObject2Condition</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span> <span class="n">isFocused</span> <span class="o">=</span>
+               <span class="n">Until</span><span class="o">.</span><span class="na">focused</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="c1">// until element's text contains</span>
+<span class="n">UiObject2Condition</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span> <span class="n">textContains</span> <span class="o">=</span>
+               <span class="n">Until</span><span class="o">.</span><span class="na">textContains</span><span class="o">(</span><span class="s">"foo"</span><span class="o">);</span>
+</code></pre>
+   </div>
+ <li><strong>EventCondition</strong> - condition which depends on event or series of event which should occur before given timeout expire
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// until new window appears in the app</span>
+<span class="n">EventCondition</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span> <span class="n">newWindowAppears</span> <span class="o">=</span>
+               <span class="n">Until</span><span class="o">.</span><span class="na">newWindow</span><span class="o">();</span>
+<span class="c1">// until previous scroll is finished</span>
+<span class="n">EventCondition</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span> <span class="n">isScrollFinished</span> <span class="o">=</span>   
+               <span class="n">Until</span><span class="o">.</span><span class="na">scrollFinished</span><span class="o">(</span><span class="n">Direction</span><span class="o">.</span><span class="na">UP</span><span class="o">);</span>
+</code></pre>
+   </div>
+</ul>
+<h2 id="building-your-own-conditions">Building your own conditions</h2>
+<p>Of course you can build your own conditions if you feel like basic ones are not enough for your. All you need to do is to implement needed interface. For example, here is how I implemented condition which will be fulfilled if resource id of element starts with some prefix:
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// Condition will be satisfied if given element</span>
+<span class="c1">// has specified count of children</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">UiObject2Condition</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span> <span class="nf">hasChildren</span><span class="o">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">childCount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">UiObject2Condition</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kt">boolean</span> <span class="nf">apply</span><span class="o">(</span><span class="n">UiObject2</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">object</span><span class="o">.</span><span class="na">getChildCount</span><span class="o">()</span> <span class="o">==</span> <span class="n">childCount</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+<h2 id="using-waits">Using waits</h2>
+<p>There are only two classes in UiAutomator which are able to utilize <code class="highlighter-rouge">Condition</code> - <code class="highlighter-rouge">UiDevice</code> and <code class="highlighter-rouge">UiObject2</code>.
+<ul>
+ <li><strong>UiDevice</strong>, similarly to Selenium’s <code class="highlighter-rouge">WebDriver</code>, represents Android device itself and with its help you can wait for elements or events
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">UiDevice</span> <span class="n">device</span> <span class="o">=</span> <span class="n">UiDevice</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span>
+     <span class="n">InstrumentationRegistry</span><span class="o">.</span><span class="na">getInstrumentation</span><span class="o">());</span>
+<span class="n">UiObject2</span> <span class="n">element</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="na">wait</span><span class="o">(</span><span class="n">Until</span>
+     <span class="o">.</span><span class="na">findObject</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">text</span><span class="o">(</span><span class="s">"foo"</span><span class="o">),</span> <span class="n">DEFAULT_TIMEOUT</span><span class="o">)));</span>
+</code></pre>
+   </div>
+ <li><strong>UiObject2</strong> represents UI element in app hierarchy and will allow you to wait for its or its attributes’ changes. It’s similar to Selenium’s <code class="highlighter-rouge">WebElement</code>.
+   <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">UiObject2</span> <span class="n">element</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="na">findElement</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">res</span><span class="o">(</span><span class="s">"foo"</span><span class="o">));</span>
+<span class="n">element</span><span class="o">.</span><span class="na">wait</span><span class="o">(</span><span class="n">Until</span><span class="o">.</span><span class="na">textContains</span><span class="o">(</span><span class="s">"bar"</span><span class="o">),</span>
+      <span class="n">DEFAULT_TIMEOUT</span><span class="o">);</span>
+</code></pre>
+   </div>
+</ul>
+<p class="notice--info"><code class="highlighter-rouge">UiObject</code> and <code class="highlighter-rouge">UiObject2</code> are two different classes. Unlike first version <code class="highlighter-rouge">UiObject2</code> can be used even if underlying view object is terminated. If you’re using UiAutomator2, I advice you to use only the second version since all the new APIs support it.
+<p>In the given examples UiAutomator will wait for some condition to be satisfied during <code class="highlighter-rouge">DEFAULT_TIMEOUT</code> of type <code class="highlighter-rouge">Long</code>. It will poll every <strong>1 second</strong> and check if condition is equal to <code class="highlighter-rouge">true</code>. For now polling time is a constant and can not be changed, but hopefully Google team will change that in future releases. If condition is not satisfied during the timeout, it will throw the <code class="highlighter-rouge">TimeoutException</code>.
+<p>Basically that’s all you need to know to start using waits in UiAutomator. In the next article I’ll explain how you can utilize them in your framework and build successful Android automation.
+     </section>
+     <footer class="page__meta">
+ <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+      <a href="http://localhost:4000/tags/#android" class="page__taxonomy-item" rel="tag">android</a><span class="sep">, </span>
+      <a href="http://localhost:4000/tags/#testing" class="page__taxonomy-item" rel="tag">testing</a><span class="sep">, </span>
+      <a href="http://localhost:4000/tags/#uiautomator" class="page__taxonomy-item" rel="tag">uiautomator</a>
+    </span>
+         <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-08-27T00:00:00-04:00">August 27, 2017</time>
+     </footer>
+     <section class="page__share">
+   <h4 class="page__share-title">Share on</h4>
+  <a href="https://twitter.com/intent/tweet?via=alexintest&text=Waiting+in+UiAutomator%20http%3A%2F%2Flocalhost%3A4000%2Fuiautomator-waiting%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fuiautomator-waiting%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fuiautomator-waiting%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fuiautomator-waiting%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+ <nav class="pagination">
+      <a href="http://localhost:4000/uiautomator-basics/" class="pagination--pager" title="UiAutomator Basics
+">Previous</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
+ </nav>
+   </div>
+     <div class="page__comments">
+       <h4 class="page__comments-title">Leave a Comment</h4>
+       <section id="disqus_thread"></section>
+</div>
+ </article>
+   <div class="page__related">
+     <h4 class="page__related-title">You May Also Enjoy</h4>
+     <div class="grid__wrapper">
+<div class="grid__item">
+ <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+   <h2 class="archive__item-title" itemprop="headline">
+        <a href="http://localhost:4000/uiautomator-basics/" rel="permalink">UiAutomator Basics
+</a>
+   </h2>
+   <p class="archive__item-excerpt" itemprop="description">Everything you need to know to start using UiAutomator
+ </article>
+</div>
+     </div>
+   </div>
+</div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   <div align="center" style="margin: 1em 0;">
+    <ins class="adsbygoogle"
+         style="display:block; border-bottom: initial;"
+         data-ad-client="ca-pub-7328585512091257"
+         data-ad-slot="3049671934"
+         data-ad-format="auto"></ins>
+   </div>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+   <div class="page__footer">
+     <footer>
+       <div class="page__footer-follow">
+ <ul class="social-icons">
+     <li><strong>Follow:</strong>
+     <li><a href="https://twitter.com/alexintest"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a>
+     <li><a href="http://github.com/alexilyenko"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a>
+   <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a>
+ </ul>
+</div>
+<div class="page__footer-copyright">&copy; 2017 Alex Ilyenko. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+     </footer>
+   </div>
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-35314255-2', 'auto');
+  ga('send', 'pageview');
+</script>
+ <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/uiautomator-waiting/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/uiautomator-waiting"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://alexilyenko.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  

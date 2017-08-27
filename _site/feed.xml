@@ -1,4 +1,100 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-08-27T00:20:40-04:00</updated><id>http://localhost:4000/</id><title type="html">Alex Ilyenko’s Blog</title><subtitle>SDET's Blog</subtitle><author><name>Alex Ilyenko</name><email>aleksey.ilyenko@gmail.com</email></author><entry><title type="html">UiAutomator Basics</title><link href="http://localhost:4000/uiautomator-basics/" rel="alternate" type="text/html" title="UiAutomator Basics" /><published>2017-08-19T00:00:00-04:00</published><updated>2017-08-19T00:00:00-04:00</updated><id>http://localhost:4000/uiautomator-basics</id><content type="html" xml:base="http://localhost:4000/uiautomator-basics/">&lt;aside class=&quot;sidebar__right&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-08-27T16:20:19-04:00</updated><id>http://localhost:4000/</id><title type="html">Alex Ilyenko’s Blog</title><subtitle>SDET's Blog</subtitle><author><name>Alex Ilyenko</name><email>aleksey.ilyenko@gmail.com</email></author><entry><title type="html">Waiting in UiAutomator</title><link href="http://localhost:4000/uiautomator-waiting/" rel="alternate" type="text/html" title="Waiting in UiAutomator" /><published>2017-08-27T00:00:00-04:00</published><updated>2017-08-27T00:00:00-04:00</updated><id>http://localhost:4000/uiautomator-waiting</id><content type="html" xml:base="http://localhost:4000/uiautomator-waiting/">&lt;aside class=&quot;sidebar__right&quot;&gt;
+&lt;nav class=&quot;toc&quot;&gt;
+    &lt;header&gt;&lt;h4 class=&quot;nav__title&quot;&gt;&lt;i class=&quot;fa fa-file-text&quot;&gt;&lt;/i&gt; Waiting in UiAutomator&lt;/h4&gt;&lt;/header&gt;
+&lt;ul class=&quot;toc__menu&quot; id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#why-to-wait&quot; id=&quot;markdown-toc-why-to-wait&quot;&gt;Why to wait?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#common-conditions&quot; id=&quot;markdown-toc-common-conditions&quot;&gt;Common conditions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#building-your-own-conditions&quot; id=&quot;markdown-toc-building-your-own-conditions&quot;&gt;Building your own conditions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#using-waits&quot; id=&quot;markdown-toc-using-waits&quot;&gt;Using waits&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/nav&gt;
+&lt;/aside&gt;
+&lt;h2 id=&quot;why-to-wait&quot;&gt;Why to wait?&lt;/h2&gt;
+&lt;p&gt;Real-life waiting is hard, and waiting in tests is not an exception. I guess all of us had difficult times, when one test failed just because we forgot about waits. Most of the test engineers use explicit waits in Selenium and similar frameworks and well-aware of their advantages over usual &lt;code class=&quot;highlighter-rouge&quot;&gt;Thread.sleep()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Waiting is an essential technique to build fast, reliable and efficient automation in your projects. UiAutomator is no different. But it could be hard to understand how to use waits with Google’s UI test tool, because of lack of documentation on the Internet. I’ll try to share easy and straightforward approach to waiting for conditions with new classes, introduced in UiAutomator2.&lt;/p&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;If you’re not familiar with UiAutomator, I recommend to read my article on &lt;a href=&quot;https://alexilyenko.github.io/uiautomator-basics/&quot;&gt;UiAutomator Essentials&lt;/a&gt; first, where I introduced framework’s main classes and API.&lt;/p&gt;
+
+&lt;h2 id=&quot;common-conditions&quot;&gt;Common conditions&lt;/h2&gt;
+&lt;p&gt;Wait methods in UiAutomator look like &lt;code class=&quot;highlighter-rouge&quot;&gt;wait(Condition condition, long timeout)&lt;/code&gt; and are used for, well, waiting for conditions to be fulfilled during given timeout.&lt;/p&gt;
+
+&lt;p&gt;Most common conditions which might come in handy in every day automation are conveniently gathered in one utility class - &lt;code class=&quot;highlighter-rouge&quot;&gt;Until&lt;/code&gt;. One can found three actual types of conditions there:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;SearchCondition&lt;/strong&gt; - a condition which is satisfied by searching for some element by specified selector
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// until element is available&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;SearchCondition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UiObject2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isAvailable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+               &lt;span class=&quot;n&quot;&gt;Until&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;By&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// until element is gone&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;SearchCondition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isGone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+               &lt;span class=&quot;n&quot;&gt;Until&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;By&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;UiObject2Condition&lt;/strong&gt; - condition which is satisfied when &lt;code class=&quot;highlighter-rouge&quot;&gt;UiObject2&lt;/code&gt; is in particular state or has specific attribute
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// until element is focused&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;UiObject2Condition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isFocused&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+               &lt;span class=&quot;n&quot;&gt;Until&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;focused&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// until element's text contains&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;UiObject2Condition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;textContains&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+               &lt;span class=&quot;n&quot;&gt;Until&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;textContains&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;EventCondition&lt;/strong&gt; - condition which depends on event or series of event which should occur before given timeout expire
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// until new window appears in the app&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;EventCondition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newWindowAppears&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+               &lt;span class=&quot;n&quot;&gt;Until&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newWindow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// until previous scroll is finished&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;EventCondition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isScrollFinished&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;   
+               &lt;span class=&quot;n&quot;&gt;Until&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scrollFinished&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Direction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;UP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;building-your-own-conditions&quot;&gt;Building your own conditions&lt;/h2&gt;
+&lt;p&gt;Of course you can build your own conditions if you feel like basic ones are not enough for your. All you need to do is to implement needed interface. For example, here is how I implemented condition which will be fulfilled if resource id of element starts with some prefix:&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Condition will be satisfied if given element&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// has specified count of children&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UiObject2Condition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hasChildren&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;childCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UiObject2Condition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UiObject2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getChildCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;childCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;using-waits&quot;&gt;Using waits&lt;/h2&gt;
+&lt;p&gt;There are only two classes in UiAutomator which are able to utilize &lt;code class=&quot;highlighter-rouge&quot;&gt;Condition&lt;/code&gt; - &lt;code class=&quot;highlighter-rouge&quot;&gt;UiDevice&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;UiObject2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;UiDevice&lt;/strong&gt;, similarly to Selenium’s &lt;code class=&quot;highlighter-rouge&quot;&gt;WebDriver&lt;/code&gt;, represents Android device itself and with its help you can wait for elements or events
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;UiDevice&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UiDevice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+     &lt;span class=&quot;n&quot;&gt;InstrumentationRegistry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstrumentation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;UiObject2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;wait&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Until&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;By&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DEFAULT_TIMEOUT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;UiObject2&lt;/strong&gt; represents UI element in app hierarchy and will allow you to wait for its or its attributes’ changes. It’s similar to Selenium’s &lt;code class=&quot;highlighter-rouge&quot;&gt;WebElement&lt;/code&gt;.
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;UiObject2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findElement&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;By&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;wait&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Until&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;textContains&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bar&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;DEFAULT_TIMEOUT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UiObject&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;UiObject2&lt;/code&gt; are two different classes. Unlike first version &lt;code class=&quot;highlighter-rouge&quot;&gt;UiObject2&lt;/code&gt; can be used even if underlying view object is terminated. If you’re using UiAutomator2, I advice you to use only the second version since all the new APIs support it.&lt;/p&gt;
+
+&lt;p&gt;In the given examples UiAutomator will wait for some condition to be satisfied during &lt;code class=&quot;highlighter-rouge&quot;&gt;DEFAULT_TIMEOUT&lt;/code&gt; of type &lt;code class=&quot;highlighter-rouge&quot;&gt;Long&lt;/code&gt;. It will poll every &lt;strong&gt;1 second&lt;/strong&gt; and check if condition is equal to &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;. For now polling time is a constant and can not be changed, but hopefully Google team will change that in future releases. If condition is not satisfied during the timeout, it will throw the &lt;code class=&quot;highlighter-rouge&quot;&gt;TimeoutException&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Basically that’s all you need to know to start using waits in UiAutomator. In the next article I’ll explain how you can utilize them in your framework and build successful Android automation.&lt;/p&gt;</content><author><name>Alex Ilyenko</name><email>aleksey.ilyenko@gmail.com</email></author><category term="uiautomator" /><category term="testing" /><category term="android" /><summary type="html">Advanced technics for building custom waits in UiAutomator</summary></entry><entry><title type="html">UiAutomator Basics</title><link href="http://localhost:4000/uiautomator-basics/" rel="alternate" type="text/html" title="UiAutomator Basics" /><published>2017-08-19T00:00:00-04:00</published><updated>2017-08-19T00:00:00-04:00</updated><id>http://localhost:4000/uiautomator-basics</id><content type="html" xml:base="http://localhost:4000/uiautomator-basics/">&lt;aside class=&quot;sidebar__right&quot;&gt;
 &lt;nav class=&quot;toc&quot;&gt;
     &lt;header&gt;&lt;h4 class=&quot;nav__title&quot;&gt;&lt;i class=&quot;fa fa-file-text&quot;&gt;&lt;/i&gt; UiAutomator Basics&lt;/h4&gt;&lt;/header&gt;
 &lt;ul class=&quot;toc__menu&quot; id=&quot;markdown-toc&quot;&gt;
@@ -21,7 +117,7 @@
 
 &lt;p&gt;On the other hand there is UiAutomator.&lt;/p&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;UiAutomator is a light-weight, easy-to-learn library, developed by Google to make things done fast, when you don’t want to spend lot’s of time on developing test code and its maintainance.&lt;/p&gt;
+  &lt;p&gt;UiAutomator is a light-weight, easy-to-learn library, developed by Google to make things done fast, when you don’t want to spend lot’s of time on developing test code and its maintenance.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Still not convinced? What if I tell you this little tool can help you to build fully functional, extendable and reliable test frameworks? Tempting, isn’t it? Stay tuned!&lt;/p&gt;
@@ -64,55 +160,42 @@
 &lt;p&gt;As I said before UiAutomator is a light-weight library so you won’t need to learn lots of classes to start using it. Here are the main ones:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/BySelector.html&quot;&gt;BySelector&lt;/a&gt;&lt;/strong&gt; - class for specifying criteria for matching UI elements in app UI herarchy. It’s similar to Selenium’s &lt;code class=&quot;highlighter-rouge&quot;&gt;By&lt;/code&gt; class.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;BySelector&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BySelector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/BySelector.html&quot;&gt;BySelector&lt;/a&gt;&lt;/strong&gt; - class for specifying criteria for matching UI elements in app UI hierarchy. It’s similar to Selenium’s &lt;code class=&quot;highlighter-rouge&quot;&gt;By&lt;/code&gt; class.
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;BySelector&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BySelector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/By.html&quot;&gt;By&lt;/a&gt;&lt;/strong&gt; - utility class for providing static factory methods for constructing &lt;code class=&quot;highlighter-rouge&quot;&gt;BySelector&lt;/code&gt;s using a shortened syntax. Folowing line brings the same meaning as &lt;code class=&quot;highlighter-rouge&quot;&gt;new BySelector().text(&quot;foo&quot;)&lt;/code&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;BySelector&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;By&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/By.html&quot;&gt;By&lt;/a&gt;&lt;/strong&gt; - utility class for providing static factory methods for constructing &lt;code class=&quot;highlighter-rouge&quot;&gt;BySelector&lt;/code&gt;s using a shortened syntax. Following line brings the same meaning as &lt;code class=&quot;highlighter-rouge&quot;&gt;new BySelector().text(&quot;foo&quot;)&lt;/code&gt;:
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;BySelector&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;By&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/UiObject2.html&quot;&gt;UiObject2&lt;/a&gt;&lt;/strong&gt; - one of the most important classes in UiAutomator library. It represents UI element in Android app hierarchy. It’s similar to Selenium’s &lt;code class=&quot;highlighter-rouge&quot;&gt;WebElement&lt;/code&gt; or Appium’s &lt;code class=&quot;highlighter-rouge&quot;&gt;MobileElement&lt;/code&gt;. You can do lots of things with it (for example read and verify element’s attributes, click on it, wait for it, look for inner elements and many more).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;UiObject2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;By&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/UiObject2.html&quot;&gt;UiObject2&lt;/a&gt;&lt;/strong&gt; - one of the most important classes in UiAutomator library. It represents UI element in Android app hierarchy. It’s similar to Selenium’s &lt;code class=&quot;highlighter-rouge&quot;&gt;WebElement&lt;/code&gt; or Appium’s &lt;code class=&quot;highlighter-rouge&quot;&gt;MobileElement&lt;/code&gt;. You can do lots of things with it (for example read and verify element’s attributes, click on it, wait for it, look for inner elements and many more).
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;UiObject2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;By&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html&quot;&gt;UiDevice&lt;/a&gt;&lt;/strong&gt; - another important class for building successfull UI test framework. It represents the device itself - either Android Phone, TV or even Watch. With its help you can find elements, wait for them, press device’s system buttons and even control remote in case of Android TV devices. Its Selenium equivalent would be &lt;code class=&quot;highlighter-rouge&quot;&gt;WebDriver&lt;/code&gt;, which I guess is familiar to most of you.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;UiDevice&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UiDevice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InstrumentationRegistry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstrumentation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html&quot;&gt;UiDevice&lt;/a&gt;&lt;/strong&gt; - another important class for building successful UI test framework. It represents the device itself - either Android Phone, TV or even Watch. With its help you can find elements, wait for them, press device’s system buttons and even control remote in case of Android TV devices. Its Selenium equivalent would be &lt;code class=&quot;highlighter-rouge&quot;&gt;WebDriver&lt;/code&gt;, which I guess is familiar to most of you.
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;UiDevice&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UiDevice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InstrumentationRegistry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstrumentation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pressBack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/Until.html&quot;&gt;Until&lt;/a&gt;&lt;/strong&gt; - utility class for constructing common conditions used for searching and waiting for elements (i.e. &lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/SearchCondition.html&quot;&gt;SearchCondition&lt;/a&gt; and &lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/UiObject2Condition.html&quot;&gt;UiObject2Condition&lt;/a&gt;, which were prototyped from Selenium’s &lt;code class=&quot;highlighter-rouge&quot;&gt;ExpectedConditions&lt;/code&gt;). I’m going to write a post about conditions and waits in UiAutomator next week. Stay tuned!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10000L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/Until.html&quot;&gt;Until&lt;/a&gt;&lt;/strong&gt; - utility class for constructing common conditions used for searching and waiting for elements (i.e. &lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/SearchCondition.html&quot;&gt;SearchCondition&lt;/a&gt; and &lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/UiObject2Condition.html&quot;&gt;UiObject2Condition&lt;/a&gt;, which were prototyped from Selenium’s &lt;code class=&quot;highlighter-rouge&quot;&gt;ExpectedConditions&lt;/code&gt;). Check out my recent post about &lt;a href=&quot;http://alexilyenko.github.io/uiautomator-waiting/&quot;&gt;conditions and waits in UiAutomator&lt;/a&gt;.
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10000L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;wait&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Until&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;By&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html&quot;&gt;Configurator&lt;/a&gt;&lt;/strong&gt; - from the name of the class you could easily get that its main purpose is to configure your UiAutomator test runner. For example I use it to remove implicit timeouts of UiAutomator, because I like to decide whenever to wait for events or not by myself. But of course it’s up to you.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Configurator&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configurator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Configurator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html&quot;&gt;Configurator&lt;/a&gt;&lt;/strong&gt; - from the name of the class you could easily get that its main purpose is to configure your UiAutomator test runner. For example I use it to remove implicit timeouts of UiAutomator, because I like to decide whenever to wait for events or not by myself. But of course it’s up to you.
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Configurator&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configurator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Configurator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;configurator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setWaitForSelectorTimeout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;These are the most common classes in UiAutomator library. But there are others, which might be useful in building your automated test framework. You can check them out in the &lt;a href=&quot;https://developer.android.com/reference/android/support/test/uiautomator/package-summary.html&quot;&gt;official documentation&lt;/a&gt;.&lt;/p&gt;
 
