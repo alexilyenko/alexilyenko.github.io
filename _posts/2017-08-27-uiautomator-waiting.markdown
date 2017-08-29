@@ -9,7 +9,6 @@ header:
 date: 2017-08-27
 tags:
   - uiautomator
-  - testing
   - android
 ---
 {% include toc title="Waiting in UiAutomator" icon="file-text" %}
@@ -18,7 +17,7 @@ Real-life waiting is hard, and waiting in tests is not an exception. I guess all
 
 Waiting is an essential technique to build fast, reliable and efficient automation in your projects. UiAutomator is no different. But it could be hard to understand how to use waits with Google's UI test tool, because of lack of documentation on the Internet. I'll try to share easy and straightforward approach to waiting for conditions with new classes, introduced in UiAutomator2.
 
-If you're not familiar with UiAutomator, I recommend to read my article on [UiAutomator Essentials](https://alexilyenko.github.io/uiautomator-basics/) first, where I introduced framework's main classes and API.
+If you're new to UiAutomator, I recommend to read my article on [UiAutomator Essentials](https://alexilyenko.github.io/uiautomator-basics/) first, where I introduced framework's main classes and API.
 {: .notice--info}
 
 ## Conditions
@@ -92,3 +91,5 @@ There are only two classes in UiAutomator which are able to utilize `Condition` 
 In the given examples UiAutomator will wait for some condition to be satisfied during `DEFAULT_TIMEOUT` of type `Long`. It will poll every **1 second** and check if condition is equal to `true`. For now polling time is a constant and can not be changed, but hopefully Google team will change that in future releases. If condition is not satisfied during the timeout, it will throw the `TimeoutException`.
 
 Basically that's all you need to know to start using waits in UiAutomator. In the next article I'll explain how you can utilize them in your framework and build successful Android automation.
+
+[<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)

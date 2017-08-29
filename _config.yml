@@ -303,4 +303,6 @@ compress_html:
   endings: all
   blanklines: true
   startings: [html, head, body]
+
+github: [metadata]
   

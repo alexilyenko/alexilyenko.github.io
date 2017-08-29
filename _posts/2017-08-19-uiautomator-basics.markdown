@@ -9,7 +9,6 @@ header:
 date: 2017-08-19
 tags:
   - uiautomator
-  - testing
   - android
 ---
 {% include toc title="UiAutomator Basics" icon="file-text" %}
@@ -35,7 +34,7 @@ First of all, you'll need to configure your Android Studio to be able to use sup
 ### Gradle
 Next thing we'll need is to set up Gradle. To do that, following changes should be added to `build.gradle` file.
 
-```groovy
+```gradle
 android {
 	...
     defaultConfig {
@@ -148,6 +147,6 @@ public class SimpleTest {
 }
 ```
 
-Alright folks, now you have everything to start writing your own tests using UiAutomator! Let me know if this post was useful for you and check out my other ones.
+Alright folks, now you have everything to start writing your own tests using UiAutomator!
 
-Cheers!
+[<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)

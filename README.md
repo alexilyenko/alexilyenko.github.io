@@ -5,4 +5,4 @@ It has a responsive design and can be viewed on any  device.
 [![Alex Ilyenko's Blog live preview][2]][1]
 
 [1]: https://alexilyenko.github.io/
-[2]: screenshot.png (live preview)
+[2]: assets/screenshot.png (live preview)
