@@ -85,10 +85,10 @@ class ExampleKotlinInstrumentedTest {
  private val yourAppPackageName = "io.github.alexilyenko.sample"
 
  @Test
-  fun useAppContext() {
-   val appContext = InstrumentationRegistry.getTargetContext()
-   assertEquals(yourAppPackageName, appContext.packageName)
-  }
+ fun useAppContext() {
+  val appContext = InstrumentationRegistry.getTargetContext()
+  assertEquals(yourAppPackageName, appContext.packageName)
+ }
 }
 ```
 ## Converting Java to Kotlin
