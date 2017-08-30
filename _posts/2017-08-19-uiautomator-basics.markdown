@@ -10,7 +10,7 @@ date: 2017-08-19
 tags:
   - uiautomator
   - android
-image: /assets/images/uiautomator_basics.jpg
+thumbnail: /assets/images/uiautomator_basics.jpg
 ---
 {% include toc title="UiAutomator Basics" icon="file-text" %}
 ## Why UiAutomator?
