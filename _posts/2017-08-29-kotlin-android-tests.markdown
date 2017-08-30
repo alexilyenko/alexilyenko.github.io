@@ -4,6 +4,7 @@ excerpt: "Setting up your environment for Instrumentation test development"
 comments: true
 related: true
 header:
+    image: "/assets/images/android_kotlin_thumbnail.png"
     overlay_image: /assets/images/android_kotlin.jpg
     overlay_filter: 0.25
 date: 2017-08-29
