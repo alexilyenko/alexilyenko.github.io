@@ -1,4 +1,5 @@
 ---
+image: /assets/images/uiautomator_basics_thumbnail.jpg
 title: "UiAutomator Basics"
 excerpt: "Everything you need to know to start using UiAutomator"
 comments: true
@@ -10,7 +11,6 @@ date: 2017-08-19
 tags:
   - uiautomator
   - android
-thumbnail: /assets/images/uiautomator_basics.jpg
 ---
 {% include toc title="UiAutomator Basics" icon="file-text" %}
 ## Why UiAutomator?
