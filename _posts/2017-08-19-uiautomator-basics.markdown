@@ -1,10 +1,10 @@
 ---
-image: /assets/images/uiautomator_basics_thumbnail.jpg
 title: "UiAutomator Basics"
 excerpt: "Everything you need to know to start using UiAutomator"
 comments: true
 related: true
 header:
+    teaser: "/assets/images/uiautomator_basics_thumbnail.jpg"
     overlay_image: /assets/images/uiautomator_basics.jpg
     overlay_filter: 0.25
 date: 2017-08-19
