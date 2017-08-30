@@ -12,6 +12,7 @@ tags:
   - uiautomator
   - android
 ---
+<img src="{{ site.url }}{{ site.baseurl }}{{ page.header.image }}" alt="{{ page.header.title }}" style="display: none;"/>
 {% include toc title="Waiting in UiAutomator" icon="file-text" %}
 ## Why to wait?
 Real-life waiting is hard, and waiting in tests is not an exception. I guess all of us had difficult times, when one test failed just because we forgot about waits. Most of the test engineers use explicit waits in Selenium and similar frameworks and well-aware of their advantages over usual `Thread.sleep()`.
