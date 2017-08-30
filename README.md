@@ -4,4 +4,4 @@ My technical blog is using Jekyll as site generator and Github Pages as a hostin
 [![Alex Ilyenko's Blog live preview][2]][1]
 
 [1]: https://alexilyenko.github.io/
-[2]: assets/screenshot.png (live preview)
+[2]: assets/images/screenshot.png (live preview)
