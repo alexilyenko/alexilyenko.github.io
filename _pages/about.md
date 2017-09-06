@@ -6,10 +6,10 @@ author_profile: false
 
 ![image-right]({{ site.url }}{{ site.baseurl }}/assets/images/big_avatar.jpg){: .align-right}
 Hey everyone! My name is Alex.
-Currently I'm working as a SDET at NBCUniversal company in New York city. My job responsibilities include tasks related to automation, testing and continuous integration. 
+Currently I work as an SDET at NBCUniversal company in New York City. My job responsibilities include automation, testing and continuous integration. I mostly specialize on Mobile and TV platforms.
 
-I am passionate about clean code and best practices of development.  Also I'm considering myself early adopter of technologies and big fan of optimizations. 
+I am passionate about clean code and best practices of development. Besides that you can consider me as early adopter of technologies and big fan of optimizations.
 
-This blog is created to document all the solutions I came to during my day-to-day work. Usually these things can be extremely difficult to google and I truly hope they could make someone's life easier. If they do such thing to yours, I will be happy! 
+This blog is created to document all the solutions I came to during my day-to-day work. Usually these things can be extremely difficult to google and I truly hope they could make someone's life easier. If they do such thing to yours, I will be happy!
 
-Don't hesitate to ask me anything in the comment section below posts. I'll try to answer to everybody! :beer:
+Don't hesitate to drop any thoughts in the comment section below posts. I'll answer to each of them! :beer:

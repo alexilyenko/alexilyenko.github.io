@@ -52,8 +52,13 @@ buildscript {
 // rest of the configuration
 ```
 ### Adding Kotlin dependency
-To be able to use Kotlin in our Instrumentation tests we'll have to add its dependency as `androidTestCompile` value to our app `build.gradle` file. Here is what should be set there:
+To be able to use Kotlin in our Instrumentation tests we'll have to apply Kotlin plugin and add its dependency as `androidTestCompile` value to our app `build.gradle` file. Here is what should be set there:
 ```gradle
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+// the rest of configuration
+
 dependencies {
  // other dependencies go here
  androidTestCompile  "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

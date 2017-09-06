@@ -148,6 +148,7 @@ public class SimpleTest {
 }
 ```
 
-Alright folks, now you have everything to start writing your own tests using UiAutomator!
+Alright folks, now you have everything to start writing your own tests using UiAutomator. If you're willing to design reliable and efficient test automation framework with this powerful tool, check out my post about [Page Object Pattern](https://alexilyenko.github.io/uiautomator-page-object/).
+
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)

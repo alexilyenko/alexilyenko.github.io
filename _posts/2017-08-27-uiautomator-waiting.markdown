@@ -91,6 +91,6 @@ There are only two classes in UiAutomator which are able to utilize `Condition` 
 
 In the given examples UiAutomator will wait for some condition to be satisfied during `DEFAULT_TIMEOUT` of type `Long`. It will poll every **1 second** and check if condition is equal to `true`. For now polling time is a constant and can not be changed, but hopefully Google team will change that in future releases. If condition is not satisfied during the timeout, it will throw the `TimeoutException`.
 
-Basically that's all you need to know to start using waits in UiAutomator. In the next article I'll explain how you can utilize them in your framework and build successful Android automation.
+Basically that's all you need to know to start using waits in UiAutomator. In the next [article](https://alexilyenko.github.io/uiautomator-page-object/) I explained where you can utilize them in your framework building successful Android automation.
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)
