@@ -164,7 +164,7 @@ To enable it open app on your device and then go to **Tools** > **Android** > **
 With Inspector's help you can find any element in your app's hierarchy, retrieve its text or check its attributes in Live mode. For instance to find `resourceId` of element simply check `mID` property value.
 <figure>
 	<a href="{{ site.url }}{{ site.baseurl }}/assets/images/layout_inspector2.png"><img src="{{ site.url }}{{ site.baseurl }}/assets/images/layout_inspector2.png"></a>
-	<figcaption><a href="{{ site.url }}{{ site.baseurl }}/assets/images/layout_inspector2.png" title="Finding locators in Android Layout Inspector">Finding locators in Android Layout Inspector</a>.</figcaption>
+	<figcaption><a href="{{ site.url }}{{ site.baseurl }}/assets/images/layout_inspector2.png" title="Finding locators in Android Layout Inspector">Finding locators in Android Layout Inspector</a></figcaption>
 </figure>
 
 ## Implementing Tests
