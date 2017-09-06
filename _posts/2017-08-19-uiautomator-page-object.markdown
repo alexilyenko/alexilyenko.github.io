@@ -7,7 +7,7 @@ header:
     image: /assets/images/uiautomator_page_object_thumbnail.png
     overlay_image: /assets/images/uiautomator_page_object.jpg
     overlay_filter: 0.25
-date: 2017-09-01
+date: 2017-09-06
 tags:
   - uiautomator
   - android
