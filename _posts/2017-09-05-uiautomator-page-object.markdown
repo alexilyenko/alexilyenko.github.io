@@ -38,11 +38,11 @@ Without explanation it's really hard to understand what is going on here, right?
 
 Besides that we're talking about functional tests, which means they depend on the UI layer of the app, and that one can be changed frequently. This could be a new design, changes of the text or attributes, restructuring of the buttons, fields or forms. And that most probably will impact our test.
 
-Imagine the actual logic of the app is changed. For example, you need to press additional button before inputting each number or wait for some event on the "screen" of Calculator before making any calculation. It cannot be done by simple "Find-Replace" operation, you'll have to actually go and add the line of code wherever it needs to be according to the new logic. Now, if you have only one test like that you might not consider this a big deal. But let's be honest, usually it's not the case. Regression suites usually contain tens or even hundreds of tests, and their maintenance in those case can be painful.
+Imagine the actual logic of the app is changed. For example, you need to press additional button before inputting each number or wait for some event on the "screen" of Calculator before making any calculation. It cannot be done by simple "Find-Replace" operation, you'll have to actually go and add the line of code wherever it needs to be according to the new logic. Now, if you have only one test like that you might not consider this a big deal. But let's be honest, usually it's not the case. Regression suites usually contain tens or even hundreds of tests, and their maintenance in those cases can be painful.
 
-So instead of having each test deal with UI elements by itself, being vulnerable to any design/functional changes, **Page Object** pattern introduces decoupling layer.
+So instead of having each test to deal with UI elements by itself, being vulnerable to any design/functional changes, **Page Object** pattern introduces decoupling layer.
 
-All we need to do is to create an object which represents UI you want to test. This can be either the whole page on the device screen, or the part of it. Its responsibility is to encapsulate all user interface interactions on the page and to contain all the UI elements (their locators) in one place. And that's the place where changes are done in case of any app modifications.
+All we need to do is to create an object which represents UI you want to test. This can be either the whole page on the device screen, or the part of it. Its responsibility would be to encapsulate all user interface interactions on the page and to contain all the UI elements (their locators) in one place. And that's the place where changes are done in case of any app modifications.
 
 **Note**: the name **Page Object** came from the Web UI Testing meaning the object, which represents current page. But since we're mostly talking about native mobile apps, when we use UiAutomator, I prefer to call this pattern **Screen Object**, because it represents current activity (screen).
 {: .notice--info}
@@ -53,7 +53,7 @@ That said the main advantages of using Page Object pattern are:
 - There is only one place you need to modify in case of app's UI changes
 - No duplication of the code, all locators and interactions are in the same place, allowing to reuse them
 
-Fo example Page Object for Facebook app can be illustrated like this:
+Fo example Page Object for Facebook app might be illustrated like this:
 {% include figure image_path="/assets/images/page_object_scheme.jpeg" alt="Page Object for Android tests" caption="Page Object for Android tests" %}
 
 In the image above there are three pages (screens), and each of our Android tests can use any of them. Pretty cool, huh? Let's figure out how to implement our own Page Object.
@@ -141,7 +141,7 @@ class Calculator(device: UiDevice)
                     : BaseScreen(device) {
 ...
 ```
-This snippet says that `Calculator` class extends from `BaseScreen` class and passes `UiDevice` instance to its superclass. Passing device instance in constructor of Page Object is considered to be common practice in constructing Page Objects, since we're separating tests and app logic. But creating of `BaseScreen` is optional, that's something I like to do to encapsulate all common actions which can be done with any screen. Remember, we did something similar with `BaseTest`?
+This snippet says that `Calculator` class extends from `BaseScreen` class and passes `UiDevice` instance to its superclass. Passing device instance in constructor of Page Object is considered to be the common practice in constructing Page Objects, since we're separating tests and app logic. But creating of `BaseScreen` is optional, that's something I like to do to encapsulate all common actions which can be done with any screen. Remember, we did something similar with `BaseTest`?
 
 `BaseScreen` example:
 ```kotlin
@@ -151,10 +151,10 @@ abstract class BaseScreen(private val device: UiDevice) {
  fun click(by: BySelector) = find(by).click()
 }
 ```
-Usually I place here all device interactions (for example `click`, `find`, `isElementVisible` or `dragAndDrop`). Also it's not a bad idea to store common to all pages constants here.
+Usually I place all device interactions (f.e. `click`, `find`, `isElementVisible` or `dragAndDrop`) here. Also it's not a bad idea to store common to all pages constants here.
 
 ### How to find locators
-Let's talk about locators a bit. There are different types of them. I recommend to use `By.res`, which creates selector for `resourceId`. That's the fastest and the most tolerant to changes type. If your app's elements do not have ids, I would ask developers to add them if I were you. Only if that's not the case I would use other locators as `By.clazz`, `By.text`, `By.desc` and others. But how do we find them?
+Let's talk about locators a bit. There are different types of them. I recommend to use `By.res`, which creates selector for `resourceId`. That's the fastest and the most tolerant to changes type. If your app's elements do not have ids, I would ask developers to add them if I were you. Only if that's not the case I would use other locators as `By.clazz`, `By.text`, `By.desc` etc. But how do we find them?
 
 Actually Android Studio ships with great prebuilt tool - **Layout Inspector**.
 
@@ -196,7 +196,7 @@ Now when we know what Page Object is and how it can be utilized in our project l
 
  - **Reusable elements**. If several app views contain same widget or menu it's always a good move to create separate object for the common element or extend both page objects from one superclass with extracted common logic. `BaseScreen` is a good candidate for storing applicable to all of your app's views logic.
 
- - **Chain Methods**. Chain methods are considered industry standard in designing Page Objects since they allow you to write automated tests in the way you write your usual test cases. For example:
+ - **Chain Methods**. Chain methods are considered industry standard in designing Page Objects since they allow you to write automated tests in the fashion you write your usual test cases. For example:
  ```kotlin
  calculator
             .enter(number)
@@ -209,7 +209,7 @@ val loginScreen: LoginScreen = openApp()
 val home: HomeScreen = loginScreen.loginAs(defaultUser)
  ```
 
-- **Waits**. In the examples above test flow looked simple, but the real world apps usually have dynamic elements and complicated animations. We can not be sure that output we expect is always there after action was done. That said in most cases we have to wait for some elements to appear, disappear, change or have some attribute.<br/>This is especially true for the transitions between Page Object. Thus another best practice is to wait until your view is opened in constructor of your Page Object class like this:
+- **Waits**. In the examples above test flow looked simple, but the real world apps usually have dynamic elements and complicated animations. We can not be sure that output we expect is always there after action was done. That said in most cases we have to wait for some elements to appear, disappear, change or have some attribute.<br/>This is especially true for the transitions between pages. Thus another best practice is to wait until your view is opened in constructor of your Page Object class like this:
 ```kotlin
 init {
     waitUntilVisible(element = someElement,

@@ -13,7 +13,7 @@ tags:
   - androidtv
 ---
 {% include toc title="How to test Android TV devices" icon="file-text" %}
-## Why you need to test Android TV app
+## Why do we need to test Android TV app
 After Google introduced [Android TV](https://www.android.com/tv/) in 2014 and Apple released its [tvOS](https://www.apple.com/tvos/) in 2015 it became clear that there is an unseen market with great demand coming from our living room. Even though it's still a young one, almost every company is trying to release its own TV app as soon as possible. It's quiet understandable because as they say "the first man gets the oyster, the second man gets the shell".
 
 The TV app development is similar to the mobile development in many ways. Thus if you want to deliver high quality product to your target audience, you need to do comprehensive testing and to use the same QA processes as you would leverage for mobile app development. I won't go into details of designing testing strategy for TV apps in this post - it's completely up to you and your teammates. Instead, I'll try to explain the key concepts of building automated infrastructure for Android TV app functional testing.
@@ -39,17 +39,17 @@ Each tool has its own advantages and limitations but in this post I will be talk
 On the lowest level mobile functional tests consist of finding elements, clicking/swiping/drag-and-dropping on them, changing or retrieving their attributes and verifying outputs. The same idea applicable to Android TV tests. There are some platform specifics though:
 - Devices do not have touchscreen
 - All actions are done using Remote control
-- Screen is in landscape screen orientation only
+- Screen is in landscape orientation only
 - Most apps are aimed to video playback
 
-The first two bullets are the ones which might cause difficulties in designing the framework. That's why I'll try to explain dealing with them in further reading.
+The first two bullets are the ones which might cause difficulties in designing the framework. But I'll try to explain dealing with them in further reading.
 
 ## Navigating through Android TV app
-Since Android TV devices do not have touchscreens all navigation should be done via special device - Remote controller.
+Since Android TV devices do not have touchscreens the navigation should be done via special device - Remote controller.
 
 {% include figure image_path="/assets/images/remote.jpg" alt="Default Android TV Remote Controller" caption="Android TV Remote Controller Example" %}
 
-This is the first thing we need to consider while starting building our automation framework. UiAutomator allows us to use Remote in the way we want, providing a command for every particular interaction:
+This is the first thing we have to consider while starting building our automation framework. UiAutomator allows us to use Remote in the way we want, providing a command for every particular interaction:
 ```kotlin
 fun back() = device.pressBack()
 fun menu() = device.pressMenu()
@@ -80,7 +80,7 @@ val focused: UiObject2? get() =
 fun isFocused(selector: BySelector): Boolean =
             device.findObject(selector)?.isFocused ?: false
 ```
-- Some elements are not focusable, but they could contain focused element inside them. That's why we'll need to implement `hasFocus` for those cases:
+- Some elements are not focusable, but they might contain focused element inside them. `hasFocus` will help us in those cases:
 ```kotlin
 fun hasFocus(selector: BySelector): Boolean =
             device.findObject(selector.hasDescendant(By.focused(true)))
@@ -91,14 +91,14 @@ Hence to select element we'll need to move focus onto it first. Now, this part m
 
 ## Strategies for finding elements in Android TV app
 ### Finding element in the column
-We'll start from the easiest approach - finding element in column. Columns in Android TV app are usually represented by menus of different kinds.
+We'll start from the easiest approach - finding element in column. Columns in Android TV apps are usually represented by menus of different kinds.
 
 {% include figure image_path="/assets/images/column.gif" alt="Finding element in column in Android TV" caption="Finding element in column" %}
 
 While searching for element in the column we should keep in mind couple of things:
-1. We can move either **up** or **down** only
-2. Element can be already focused
-3. Element can be located either above or below currently focused element
+1. We can move either up or down only
+2. Element may be already focused
+3. Element might be located either above or below currently focused element
 4. We need to determine if the end of the column is reached
 5. Element might not be in the column at all
 
@@ -125,30 +125,30 @@ fun findInColumn(by: BySelector) {
 fun moveFocus(isEndReached: Boolean) =
             if (isEndReached) up() else down()
 ```
-We are moving through the elements in the column checking if given element is focused. While doing that we check if the end of the column reached by comparing previous focused element to current one. If end is reached for the second time, which means all elements have been inspected, exception will be thrown.
+We are moving through the elements in the column checking if given element is focused. While doing that we check if the end of the column reached by comparing previous focused element with current one. If end is reached for the second time, which means all elements have been inspected, exception will be thrown.
 
 ### Finding element in the row
 Finding element in row is essential for the testing of Android TV. It's so important because almost every app keeps its content in so called "shelves". And user can navigate easily from one element to another the same way she would do in the real-world video store.
 
 {% include figure image_path="/assets/images/row.gif" alt="Finding element in row in Android TV" caption="Finding element in row" %}
 
-For finding element in the row we could use the same principles as for column. Actually our algorithm would look almost the same. The only thing we'd need to change is `moveFocus` method:
+For finding element in the row we could use the same principles as for column look up. Actually our algorithm will look almost the same. The only thing we'd need to change is `moveFocus` method:
 
 ```kotlin
 fun moveFocus(isEndReached: Boolean) =
                         if (isEndReached) left() else right()
 ```
 
-This way we will inspect elements to both - left and right from the currently focused element.
+This way we will inspect elements to both - left and right side from the currently focused element.
 ### Finding element in the grid
-Vertical grid is the most difficult place to find elements. We'll need to move in three directions - left, right and down.
+Vertical grid is the most difficult place to find elements because we have to move in three directions - left, right and down.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/s9FT2fW6M94?rel=0" frameborder="0" allowfullscreen></iframe>
 
 Several things to consider before actual search:
 1. The best place to start is the upper left/right element. Starting from it we won't need to return to check if element was missed in the beginning
 2. Since in our case grid's row is not completely visible, all elements in row should be inspected before switching to next one
 3. In the end of each row direction should be changed too
-4. Grid can be asymmetrical, which means we have to inspect both of its bottom elements
+4. Grid can be asymmetrical (last row is incomplete), which means we have to inspect both of its bottom elements
 
 Schematically our algorithm would work like this:
 
@@ -165,7 +165,7 @@ v
 v
 16 -> 17 -> 18
 ```
-Schema example is represented by asymmetrical grid on purpose. When 15th element is reached(`isEndReached = true`), we will return to the 11th one and go down to search element in the last incomplete row.
+Schema example represents asymmetrical grid on purpose. When 15th element is reached(`isEndReached = true`), we will return to the 11th one and go down to search element in the last incomplete row.
 
 Actual implementation would look like this:
 ```kotlin
@@ -205,10 +205,14 @@ fun moveFocus(isMovingRight: Boolean) =
 The idea is the same we've seen in `findInColumn`. The key difference is switching from row to row when end of the first one is reached. Also test developer should foresee the case wherever grid is asymmetrical, inspecting both sides of the last row before throwing the exception.
 
 ### Further optimizations
-All algorithms from the post could be optimized. For example I prefer to increase number of steps of focus movement while element is not visible to speed up searching. Part of the code from each approach can be reused. As a matter of fact, I'm using the same method for all three strategies and differentiating them by created enums. As for grid search, wherever you are able to see the whole row, you can skip rows until you spot the particular element.
+All algorithms in the post could be optimized. For instance, I prefer to increase number of steps of focus movement while element is not visible to speed up searching.
 
-If you're wondering how to build-in this approaches into your framework, I suggest to move "find methods" to `BaseScreen` class or even create dedicated `Actions` class for encapsulating all device actions. More on doing that can be found in my post - [Page Object in designing test framework with UiAutomator](https://alexilyenko.github.io/uiautomator-page-object/).
+Also part of the code from each approach can be reused. As a matter of fact, I'm using the same method for all three strategies and differentiating them by created `Direction` enums.
 
-In case you have other thoughts for optimizations please share them in the comments.
+As for grid search, whenever you are able to see the whole row, you can skip rows until you spot the particular element.
+
+If you're wondering how to build-in these approaches into your framework, I suggest to move "find methods" to `BaseScreen` class or even create dedicated `Actions` class for encapsulating all device actions. More on doing that can be found in my post - [Page Object in designing test framework with UiAutomator](https://alexilyenko.github.io/uiautomator-page-object/).
+
+In case you have other thoughts on optimization I'd love to hear them!
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)
