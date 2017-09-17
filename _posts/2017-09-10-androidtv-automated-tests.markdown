@@ -213,6 +213,8 @@ As for grid search, whenever you are able to see the whole row, you can skip row
 
 If you're wondering how to build-in these approaches into your framework, I suggest to move "find methods" to `BaseScreen` class or even create dedicated `Actions` class for encapsulating all device actions. More on doing that can be found in my post - [Page Object in designing test framework with UiAutomator](https://alexilyenko.github.io/uiautomator-page-object/).
 
+Also the good practice is to run your tests on multiple devices simultaneously. It will help you to get faster feedback about any potential issues and thus decrease amount of resources needed for fixing it. If that's what you need, you could read my article about [Parallel Functional Android Tests](https://alexilyenko.github.io/android-parallel/).
+
 In case you have other thoughts on optimization I'd love to hear them!
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)

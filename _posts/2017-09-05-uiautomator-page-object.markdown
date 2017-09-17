@@ -218,5 +218,6 @@ init {
 ```
 In case if element is not displayed during given timeout, your test will fail with the exception and appropriate message. I wrote a whole post about [Waits in UiAutomator](https://alexilyenko.github.io/uiautomator-waiting/) and if you're interested in building sophisticated automation framework with this tool, I recommend to read it.
 
+- **Parallel run**. Final thing among advanced techniques would be simultaneous run of your tests on multiple devices. It will significantly decrease amount of time needed for your tests to run and help to get faster feedback about any potential problems. I wrote a post about [Parallel Run of Android Tests](https://alexilyenko.github.io/android-parallel/), so if you're interested, please take a look.
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)
