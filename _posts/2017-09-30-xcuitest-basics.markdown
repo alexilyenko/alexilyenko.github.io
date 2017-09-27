@@ -7,7 +7,7 @@ header:
     image: /assets/images/xctest_basics_thumbnail.png
     overlay_image: /assets/images/xctest_basics.jpg
     overlay_filter: 0.25
-date: 2017-09-25
+date: 2017-09-30
 tags:
   - xctest
   - ios
