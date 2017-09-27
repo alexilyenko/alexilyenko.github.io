@@ -1,18 +1,18 @@
 ---
-title: "UiAutomator Basics"
-excerpt: "Everything you need to know to start using UiAutomator"
+title: "XCTest UI Testing Basics"
+excerpt: "Everything you need to know to start using XCTest in iOS functional testing"
 comments: true
 related: true
 header:
-    image: /assets/images/uiautomator_basics_thumbnail.png
-    overlay_image: /assets/images/uiautomator_basics.jpg
+    image: /assets/images/xctest_basics_thumbnail.png
+    overlay_image: /assets/images/xctest_basics.jpg
     overlay_filter: 0.25
-date: 2017-08-19
+date: 2017-09-25
 tags:
-  - uiautomator
-  - android
+  - xctest
+  - ios
 ---
-{% include toc title="UiAutomator Basics" icon="file-text" %}
+{% include toc title="XCTest UI Testing Basics" icon="file-text" %}
 ## Why UiAutomator?
 Time to time my colleagues from other departments ask me about framework I'm using for automating UI tests on Android and AndroidTV devices. And they really wonder when I tell them I'm using **UiAutomator** for those purposes. Not because they think it's not appropriate solution for their tasks, but rather because they haven't even heard about this kind of framework.
 
