@@ -4,7 +4,7 @@ excerpt: "Advanced technics for building custom waits in UiAutomator"
 comments: true
 related: true
 header:
-    image: /assets/images/uiautomator_waits_thumbnail.jpg
+    image: /assets/images/uiautomator_waits_thumbnail.png
     overlay_image: /assets/images/uiautomator_waits.jpg
     overlay_filter: 0.25
 date: 2017-08-27
