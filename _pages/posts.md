@@ -1,5 +1,5 @@
 ---
-title:  "Posts"
+title:  
 layout: archive
 permalink: /
 author_profile: true
@@ -20,4 +20,3 @@ comments: false
    {% include archive-single.html %}
   {% endfor %}
 </ul>
-

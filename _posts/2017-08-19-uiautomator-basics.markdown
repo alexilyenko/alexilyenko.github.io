@@ -14,7 +14,7 @@ tags:
 ---
 {% include toc title="UiAutomator Basics" icon="file-text" %}
 ## Why UiAutomator?
-Time to time my colleagues from other departments ask me about framework I'm using for automating UI tests on Android and AndroidTV devices. And they really wonder when I tell them I'm using **UiAutomator** for those purposes. Not because they think it's not appropriate solution for their tasks, but rather because they haven't even heard about this kind of framework.
+Time to time my colleagues from other departments ask me about framework I'm using for automating UI tests on Android and Android TV devices. And they really wonder when I tell them I'm using **UiAutomator** for those purposes. Not because they think it's not appropriate solution for their tasks, but rather because they haven't even heard about this kind of framework.
 
 From my side it's odd to hear that. No, don't get me wrong, I'm familiar with all those fancy frameworks like Appium, Espresso, Robotium etc (and we'll talk about them in my further posts). But let's face the truth - most of the functionality these instruments provide you'll never use, and to support them you'll have to have whole team of automation engineers. And that's expensive, right?
 
@@ -98,53 +98,55 @@ Here is the code snippet of the simple test script.
 @RunWith(AndroidJUnit4.class)
 public class SimpleTest {
 
-    private static final long DEFAULT_TIMEOUT = 30000L;
-    private static final String PACKAGE_NAME = "com.example.app";
-    private UiDevice device;
+ private static final long DEFAULT_TIMEOUT = 30000L;
+ private static final String PACKAGE_NAME = "com.example.app";
+ private UiDevice device;
 
-    @Before
-    public void setUp() {
-        // Disabling waiting for selector implicit timeout
-        Configurator.getInstance().setWaitForSelectorTimeout(0);
-        // Initializing UiDevice instance
-        device = UiDevice.getInstance(InstrumentationRegistry
+ @Before
+ public void setUp() {
+  // Disabling waiting for selector implicit timeout
+  Configurator.getInstance().setWaitForSelectorTimeout(0);
+  // Initializing UiDevice instance
+  device = UiDevice.getInstance(InstrumentationRegistry
                                 .getInstrumentation());
 
-        // Starting the app
-        Context context = InstrumentationRegistry.getInstrumentation()
+  // Starting the app
+  Context context = InstrumentationRegistry.getInstrumentation()
                                 .getContext();
-        Intent intent = context.getPackageManager()
+  Intent intent = context.getPackageManager()
                                 .getLaunchIntentForPackage(PACKAGE_NAME);
-        context.startActivity(intent);
+  context.startActivity(intent);
 
-        // Waiting for app activity to appear
-        device.wait(Until
-                .hasObject(By.pkg(PACKAGE_NAME).depth(0)), DEFAULT_TIMEOUT);
-    }
+  // Waiting for app activity to appear
+  device.wait(Until
+        .hasObject(By.pkg(PACKAGE_NAME).depth(0)), DEFAULT_TIMEOUT);
+ }
 
-    @Test
-    public void test() {
-        // Finding element
-        UiObject2 editText = device.findObject(By.text("edit_text"));
-        // Sending text to element
-        editText.setText("123456");
+ @Test
+ public void formTest() {
+  // Finding element
+  UiObject2 editText = device.findObject(By.text("edit_text"));
+  // Sending text to element
+  editText.setText("123456");
 
-        // Waiting for element
-        BySelector submitButtonSelector = By.text("submit");
-        UiObject2 submitButton = device.wait(Until
+  // Waiting for element
+  BySelector submitButtonSelector = By.text("submit");
+  UiObject2 submitButton = device.wait(Until
                 .findObject(submitButtonSelector), DEFAULT_TIMEOUT);
-        // Clicking on element
-        submitButton.click();
+  // Clicking on element
+  submitButton.click();
 
-        // Waiting for element to disappear
-        device.wait(Until.gone(submitButtonSelector), DEFAULT_TIMEOUT);
-    }
+  BySelector alertSelector = By.desc("alert");
+  // Waiting for alert to appear
+  UiObject2 alert = device.wait(Until.findObject(alert), DEFAULT_TIMEOUT);
+  assertEquals(alert.getText(), "Success!");
+ }
 
-    @After
-    public void tearDown() {
-        // Taking screenshot after test
-        device.takeScreenshot(new File("screenshot-file-name.jpg"));
-    }
+ @After
+ public void tearDown() {
+  // Taking screenshot after test
+  device.takeScreenshot(new File("screenshot-file-name.jpg"));
+ }
 }
 ```
 
