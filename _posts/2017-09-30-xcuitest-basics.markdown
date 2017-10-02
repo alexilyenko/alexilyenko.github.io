@@ -30,7 +30,7 @@ Here is why I would suggest XCTest over other tools for UI testing of iOS and tv
 ## How to get started writing tests with XCTest
 It's pretty simple. All we have to do is to add extra target to our Xcode project.
 
-{% include figure image_path="/assets/images/add_target_xctest.png" alt="how to configure XCUITest" caption="Go to Xcode project file and press on Plus symbol under the targets in your project" %}
+{% include figure image_path="/assets/images/add_target_xctest.png" alt="how to configure XCUITest" caption="Select Xcode project file and add new target to your project" %}
 
 {% include figure image_path="/assets/images/ios_ui_testing_bundle.png" alt="iOS UI testing setup" caption="Find iOS UI Testing Bundle among Target templates" %}
 
