@@ -100,7 +100,7 @@ func waitForExpectation(expectation:XCTestExpectation,
  }
 }
 ```
-### Custom expectation
+### Custom expectations
 The last thing, I wanted to cover today, is creating your custom expectations and waiting for their fulfillment. There might be situations out there when you want to wait for something, but none of the default expectations is suitable for that. There is a technique for this too!
 
 For example, we need to wait for our asynchronous method `executeSomething` to be completed. All we need to do is to invoke `fulfill` method of `XCTestExpectation` object in the `completion` handler block like this:
