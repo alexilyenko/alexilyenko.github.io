@@ -21,7 +21,7 @@ Besides that during the last Google I/O conference Android team [officially anno
 {: .notice--info}
 
 ## Android Studio Setup
-Android Studio 3.0 ship with Kotlin bundled out of the box, which means you will no longer need to worry about compatibility issues and installation of any extras. But since most of us is still using the second version of the popular IDE, we have go through some additional steps. No worries, it wont' take long.
+Android Studio 3.0 ships with Kotlin bundled out of the box, which means you will no longer need to worry about compatibility issues and installation of any extras. But since most of us is still using the second version of the popular IDE, we have go through some additional steps. No worries, it wont' take long.
 
 First of all, we'll need to install Kotlin plugin. This can be done by navigating to **Preferences** > **Plugins** > **Browse Repositories** and searching for `Kotlin` keyword there. After that just click on the `Install` button like it's shown in the figure
 

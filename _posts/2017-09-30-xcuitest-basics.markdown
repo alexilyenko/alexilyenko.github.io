@@ -133,6 +133,9 @@ class SimpleTest: XCTestCase {
 
 This test is looking for the text field at first, then inputs some text into it, presses the button and waits for alert to appear. When alert appears, it will verify its text.
 
+There was a basic wait used in the code snippet above. If you want to find more about advanced techniques of doing that, check out my recent post about [Waits in XCUITest](http://alexilyenko.github.io/xcuitest-waiting/).
+{: .notice--info}
+
 That's it for today's XCTest UI Testing Basics. If you have something to add please share it in the comments.
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)
