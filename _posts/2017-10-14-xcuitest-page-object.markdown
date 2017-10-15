@@ -1,5 +1,5 @@
 ---
-title: "Page Object in XCUITest Tests"
+title: "Page Object in XCTest UI Tests"
 excerpt: "Advanced technique for building iOS/tvOS UI testing frameworks"
 comments: true
 related: true
@@ -12,7 +12,7 @@ tags:
   - xctest
   - ios
 ---
-{% include toc title="Page Object in XCUITest Tests" icon="file-text" %}
+{% include toc title="Page Object in XCTest UI Tests" icon="file-text" %}
 ## Why Page Object Pattern
 We already discussed the Page (Screen) Object Pattern and why you should consider using it in development of your test automation architecture in [Page Object for Android UI Tests](https://alexilyenko.github.io/uiautomator-page-object/) post. In today's article we won't go into deep, instead I'll shed the light on the key points of using the pattern and share couple of practical examples. But if you're interested in the details don't hesitate to check out my original post about it.
 
