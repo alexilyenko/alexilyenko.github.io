@@ -1,6 +1,6 @@
 ---
 title: "Page Object in XCTest UI Tests"
-excerpt: "Advanced technique for building iOS/tvOS UI testing frameworks"
+excerpt: "Advanced technique for building iOS/tvOS testing frameworks"
 comments: true
 related: true
 header:
