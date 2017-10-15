@@ -101,7 +101,7 @@ Now all we have to do is to invoke static method `Spoon#screenshot` in our tests
 ```kotlin
 Spoon.screenshot(activity, screenshotName, testClassName, testMethodName)
 ```
-Full example of invocation along with the retrieval of current activity can be found in [GitHub repository](https://github.com/alexilyenko/SimpleCalculator/blob/master/app/src/androidTest/kotlin/io/github/alexilyenko/sample/pageobject/tests/BaseTest.kt). All examples are written in Kotlin, hence if you haven't heard about this programming language I recommend to read my post about [Android Tests in Kotlin](https://alexilyenko.github.io/kotlin-android-tests/).
+Full example of invocation along with the retrieval of current activity can be found in [GitHub repository](https://github.com/alexilyenko/SimpleAndroidCalculator/blob/master/app/src/androidTest/kotlin/io/github/alexilyenko/sample/pageobject/tests/BaseTest.kt). All examples are written in Kotlin, hence if you haven't heard about this programming language I recommend to read my post about [Android Tests in Kotlin](https://alexilyenko.github.io/kotlin-android-tests/).
 
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)

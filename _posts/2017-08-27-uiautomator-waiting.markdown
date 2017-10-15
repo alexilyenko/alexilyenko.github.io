@@ -1,6 +1,6 @@
 ---
 title: "Waiting in UiAutomator"
-excerpt: "Advanced technics for building custom waits in UiAutomator"
+excerpt: "Advanced techniques for building custom waits in UiAutomator"
 comments: true
 related: true
 header:
