@@ -157,7 +157,7 @@ func testPrintTree() {
 The executed command will give us output like that:
 <figure>
 	<a href="{{ site.url }}{{ site.baseurl }}/assets/images/xctest_debug_description.png"><img src="{{ site.url }}{{ site.baseurl }}/assets/images/xctest_debug_description.png"></a>
-	<figcaption><a href="{{ site.url }}{{ site.baseurl }}/assets/images/xctest_debug_description.png" title="Finding locators in Android Layout Inspector">debugDescription output and actual iOS app in comparison</a></figcaption>
+	<figcaption>debugDescription output and actual iOS app in comparison</figcaption>
 </figure>
 If we compare it to actual app one by one, it will become clear how to generate locators. For example we can observe full tree and the depth of all elements on the screen. We are also able to find out their types, accessibility IDs, labels, ancestors and children here.
 
