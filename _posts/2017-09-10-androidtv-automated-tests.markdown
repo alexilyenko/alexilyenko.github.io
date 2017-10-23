@@ -18,7 +18,7 @@ After Google introduced [Android TV](https://www.android.com/tv/) in 2014 and Ap
 
 The TV app development is similar to the mobile development in many ways. Thus if you want to deliver high quality product to your target audience, you need to do comprehensive testing and to use the same QA processes as you would leverage for mobile app development. I won't go into details of designing testing strategy for TV apps in this post - it's completely up to you and your teammates. Instead, I'll try to explain the key concepts of building automated infrastructure for Android TV app functional testing.
 
-By the way, If you would like to see similar post about AppleTV functional testing, please let me know in the comment section below.
+You may also want to check out one of my other posts about [Automated Testing for Apple TV apps](https://alexilyenko.github.io/apple-tv-automated-tests/)
 {: .notice--info}
 
 ## What tool to use for Android TV testing
@@ -139,7 +139,7 @@ fun moveFocus(isEndReached: Boolean) =
                         if (isEndReached) left() else right()
 ```
 
-This way we will inspect elements to both - left and right side from the currently focused element.
+This way we will inspect elements to both - left and right sides from the currently focused element.
 ### Finding element in the grid
 Vertical grid is the most difficult place to find elements because we have to move in three directions - left, right and down.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/s9FT2fW6M94?rel=0" frameborder="0" allowfullscreen></iframe>
