@@ -1,5 +1,5 @@
 ---
-title: "Parallel Android tests with Spoon"
+title: "Parallel Android Tests with Spoon"
 excerpt: "Learn how to run your UI tests on multiple devices simultaneously"
 comments: true
 related: true
@@ -10,10 +10,11 @@ header:
 date: 2017-09-15
 tags:
   - android
+  - androidtv
 ---
-{% include toc title="Parallel Android tests with Spoon" icon="file-text" %}
+{% include toc title="Parallel Android Tests with Spoon" icon="file-text" %}
 ## Why Spoon?
-It's a well known fact that Mobile Apps are the next big thing and no-one argues their testing is really important nowadays. There are couple of open source tools allowing to run your functional mobile tests across multiple platforms in parallel to ensure the app runs as expected on different sets of OS versions, screen sizes and hardware configurations. But what if your application's supposed to run only on one of those set?
+It's a well known fact that Mobile Apps are the next big thing and no one argues their testing is really important nowadays. There are couple of open source tools allowing to run your functional mobile tests across multiple platforms in parallel to ensure the app runs as expected on different sets of OS versions, screen sizes and hardware configurations. But what if your application's supposed to run only on one of those set?
 
 {% include figure image_path="/assets/images/sharding.gif" alt="Parallel test run on different Android devices" caption="Parallel test run on different Android devices" %}
 

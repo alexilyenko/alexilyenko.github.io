@@ -11,6 +11,7 @@ date: 2017-08-19
 tags:
   - uiautomator
   - android
+  - androidtv
 ---
 {% include toc title="UiAutomator Basics" icon="file-text" %}
 ## Why UiAutomator?

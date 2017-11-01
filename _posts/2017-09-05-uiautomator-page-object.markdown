@@ -11,6 +11,7 @@ date: 2017-09-06
 tags:
   - uiautomator
   - android
+  - androidtv
 ---
 {% include toc title="Page Object for UiAutomator tests" icon="file-text" %}
 Software patterns are like programming languages - you can not know them all. Well, yes, you could've read the Gang of Four's book and learn most of them by examples given there. But Software Development is still a young industry, which has grown rapidly over the last decades allowing its subdivisions to create their own patterns and best practices. Test Development has got its own ones too, and **Page Object** is one of them.

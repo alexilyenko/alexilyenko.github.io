@@ -11,6 +11,7 @@ date: 2017-10-14
 tags:
   - xctest
   - ios
+  - appletv
 ---
 {% include toc title="Page Object in XCTest UI Tests" icon="file-text" %}
 ## Why Page Object Pattern
@@ -204,6 +205,6 @@ init() {
 ```
 In my opinion, it's impossible to build fast and reliable automation without explicit waits. I wrote the article about [Waits in XCUITest](https://alexilyenko.github.io/xcuitest-waiting/) and you may want to check it out if you want to master this practice.
 
-- **Parallel run**. The last advanced technique for today will be test parallelization. It's not directly related to Page Object pattern but it affects your testing approach in general. It's essential to execute your tests simultaneously to perform more of them in a tighter window, get feedback earlier and release faster. I will write about Parallel Tests with XCUITest in one of my next posts.
+- **Parallel run**. The last advanced technique for today will be test parallelization. It's not directly related to Page Object pattern but it affects your testing approach in general. It's essential to execute your tests simultaneously to perform more of them in a tighter window, get feedback earlier and release faster. I wrote about [Parallel Tests with XCUITest](https://alexilyenko.github.io/ios-parallel-tests/) in one of my posts.
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)

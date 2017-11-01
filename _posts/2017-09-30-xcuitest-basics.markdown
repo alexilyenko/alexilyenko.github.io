@@ -11,6 +11,7 @@ date: 2017-09-30
 tags:
   - xctest
   - ios
+  - appletv
 ---
 {% include toc title="XCTest UI Testing Basics" icon="file-text" %}
 ## Why XCTest?
