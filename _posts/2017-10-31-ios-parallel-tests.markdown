@@ -1,6 +1,6 @@
 ---
 title: "Parallel iOS/tvOS Tests"
-excerpt: "Get the most out from your automated tests by running them in parallel"
+excerpt: "Getting the most out from your automated tests by running them in parallel"
 comments: true
 related: true
 header:

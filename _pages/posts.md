@@ -7,6 +7,7 @@ comments: false
 ---
 
 <ul>
+  <h1>Recent Posts</h1>
   {% for post in site.posts %}
     {% unless post.next %}
       <font color="#778899"><h2 class="archive__subtitle">{{ post.date | date: '%Y %b' }}</h2></font>
