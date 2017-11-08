@@ -109,18 +109,20 @@ public class SimpleTest {
   Configurator.getInstance().setWaitForSelectorTimeout(0);
   // Initializing UiDevice instance
   device = UiDevice.getInstance(InstrumentationRegistry
-                                .getInstrumentation());
+                   .getInstrumentation());
 
   // Starting the app
   Context context = InstrumentationRegistry.getInstrumentation()
-                                .getContext();
+                    .getContext();
   Intent intent = context.getPackageManager()
-                                .getLaunchIntentForPackage(PACKAGE_NAME);
+                    .getLaunchIntentForPackage(PACKAGE_NAME)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
   context.startActivity(intent);
 
   // Waiting for app activity to appear
   device.wait(Until
-        .hasObject(By.pkg(PACKAGE_NAME).depth(0)), DEFAULT_TIMEOUT);
+        .hasObject(By.pkg(PACKAGE_NAME).depth(0)),
+                   DEFAULT_TIMEOUT);
  }
 
  @Test
@@ -133,13 +135,15 @@ public class SimpleTest {
   // Waiting for element
   BySelector submitButtonSelector = By.text("submit");
   UiObject2 submitButton = device.wait(Until
-                .findObject(submitButtonSelector), DEFAULT_TIMEOUT);
+                .findObject(submitButtonSelector),
+                DEFAULT_TIMEOUT);
   // Clicking on element
   submitButton.click();
 
   BySelector alertSelector = By.desc("alert");
   // Waiting for alert to appear
-  UiObject2 alert = device.wait(Until.findObject(alert), DEFAULT_TIMEOUT);
+  UiObject2 alert = device.wait(Until.findObject(alert),
+                                DEFAULT_TIMEOUT);
   assertEquals(alert.getText(), "Success!");
  }
 

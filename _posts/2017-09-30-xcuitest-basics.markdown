@@ -81,7 +81,7 @@ device
   .siriService
   .activate(voiceRecognitionText: "Hey Siri! How are you?")
 ```
-* **[XCUIRemote](https://developer.apple.com/documentation/xctest/xcuiremote)** - this class simulates interactions done via physical remote controller (e.g. on Apple TV devices).
+* **[XCUIRemote](https://developer.apple.com/documentation/xctest/xcuiremote)** - this class simulates interactions done via physical remote controller (e.g. on [Apple TV devices](https://alexilyenko.github.io/apple-tv-automated-tests/)).
 ```swift
 let remote = XCUIRemote.shared
 remote.press(.playPause)
