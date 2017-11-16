@@ -1,5 +1,5 @@
 ---
-title: "Using Kotlin for Android Tests"
+title: "Using Kotlin in Android Tests"
 excerpt: "Setting up your environment for Instrumentation test development"
 comments: true
 related: true
@@ -13,7 +13,7 @@ tags:
   - androidtv
   - kotlin
 ---
-{% include toc title="Using Kotlin for Android UI Tests" icon="file-text" %}
+{% include toc title="Using Kotlin in Android UI Tests" icon="file-text" %}
 ## Why Kotlin?
 If you follow the latest trends in Android world or development in general, you've likely already heard about [Kotlin](https://kotlinlang.org/). It's a programming language, developed by JetBrains company, creator of Android Studio. Among its numerous advantages one can find proper functions, less of boilerplate code, no-overhead null-safety, smart casts and stream-like arrays. If you're wondering what other pros and cons Kotlin has in comparison to Java, check out [official documentation](https://kotlinlang.org/docs/reference/comparison-to-java.html).
 
@@ -23,7 +23,7 @@ Besides that during the last Google I/O conference Android team [officially anno
 {: .notice--info}
 
 ## Android Studio Setup
-Android Studio 3.0 ships with Kotlin bundled out of the box, which means you will no longer need to worry about compatibility issues and installation of any extras. But since most of us is still using the second version of the popular IDE, we have go through some additional steps. No worries, it wont' take long.
+Android Studio 3.0 ships with Kotlin bundled in, which means you will no longer need to worry about compatibility issues and installation of any extras. But since most of us is still using the second version of the popular IDE, we have go through some additional steps. No worries, it wont' take long.
 
 First of all, we'll need to install Kotlin plugin. This can be done by navigating to **Preferences** > **Plugins** > **Browse Repositories** and searching for `Kotlin` keyword there. After that just click on the `Install` button like it's shown in the figure
 
