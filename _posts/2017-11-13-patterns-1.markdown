@@ -80,26 +80,56 @@ Chain of Invocations is easy to implement. All you have to do is to return the v
 
 This pattern doesn't help to reduce code a lot (that's not its mission thought), but it allows you to not repeat yourself by putting the object again and again before invoking its methods. Also IMO it makes code a little bit prettier.
 
-## (Page) Factory
-The next pattern is Page Factory or simply Factory, since it can be used without any pages.
+## Page Factory
+Page Factory is an extension to Page Object pattern. It helps to encapsulate page's attributes and methods even more by providing `FindBy` annotations.
 ```java
-HomePage homePage = new HomePage()
-   .typeLogin(user.login)
-   .typePassword(user.password)
-   .tapSignInButton();
+public class LoginPage extends BasePage {
+ private static final By USERNAME_FIELD =
+                              By.id("usernameField");
+ private static final By PASSWORD_FIELD =
+                              By.id("passwordField");
+ private static final By LOGIN_BUTTON =
+                              By.id("loginButton");
+
+ public LoginPage(WebDriver driver) {
+  super(driver);
+ }
+
+ public HomePage loginAs(User user) {
+  driver.findElement(USERNAME_FIELD)
+        .sendKeys(user.username);
+  driver.findElement(PASSWORD_FIELD)
+        .sendKeys(user.password);
+  driver.findElement(LOGIN_BUTTON)
+        .click();
+  return new HomePage(driver);
+ }
+}
 ```
 {% include figure image_path="/assets/images/arrow.png"%}
 ```java
-HomePage homePage = loginAs(user);
+public class LoginPage extends BasePage {
+ @FindBy
+ private WebElement usernameField;
+ @FindBy
+ private WebElement passwordField;
+ @FindBy
+ private WebElement loginButton;
 
-public HomePage loginAs(User user) {
-  return new HomePage()
-    .typeLogin(user.login)
-    .typePassword(user.password)
-    .tapSignInButton();
+ public LoginPage(WebDriver driver) {
+  super(driver);
+  PageFactory.initElements(driver, this);
+ }
+
+ public HomePage loginAs(User user) {
+  usernameField.sendKeys(user.username);
+  passwordField.sendKeys(user.password);
+  loginButton.click();
+  return new HomePage(driver);
+ }
 }
 ```
-According to [Wikipedia](https://en.wikipedia.org/wiki/Factory_method_pattern) Factory is pattern which helps to solve the problem of creating objects without specifying the exact type for each of them. In other words, it can be used whenever we create multiple objects with some additional actions done to them before using them. In the example above we have login action which obviously would be done over and over again in our test scripts. So it would be easier to implement factory method `loginAs`, which returns the `HomePage` instance with already logged in user.
+Pay attentions to `PageFactory#initElements` invocation. This static helper initializes all fields with `FindBy` annotations on the page, which will be found on it on each call. The main advantage is the fact that now we work directly with fields, buttons, windows etc. and do not worry about low level driver's interactions exactly the same way our app users do.
 
 ## Composition of Page Elements
 {% include figure image_path="/assets/images/components.png" alt="Breaking down page into Page Elements" caption="Breaking down page into Page Elements"%}
