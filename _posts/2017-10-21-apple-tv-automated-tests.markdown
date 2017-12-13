@@ -50,7 +50,8 @@ First let's take a look at the several helper methods to navigate through your a
 - `focused` returns the element which is focused at the moment.
 ```swift
 var focused: XCUIElement {
- return findBy(NSPredicate(format: "hasFocus == true"))
+ return app.element(matching:
+    NSPredicate(format: "hasFocus == true")
 }
 ```
 - `hasFocus` - one of the properties of `XCUIElement` object. Determines if the particular element is focused.
