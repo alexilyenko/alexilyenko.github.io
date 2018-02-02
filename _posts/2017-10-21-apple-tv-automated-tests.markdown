@@ -107,8 +107,11 @@ Now let's stop for the moment and take a glance on how elements are compared in 
 ```swift
 extension XCUIElement {
  var details: String {
-  return debugDescription
-          .replaceAll(NSRegularExpression("0x\\S+"), "")
+ let regex = try! NSRegularExpression(pattern: "0x\\S+",
+    options: .caseInsensitive)
+ return regex.stringByReplacingMatches(in: debugDescription,
+    options: [], range: NSMakeRange(0, debugDescription.count),
+     withTemplate: "")
  }
 }
 ```
@@ -218,7 +221,7 @@ No doubt, all the of the given algorithms could be optimized in one way or anoth
 
 The next step in terms of optimization I would do, is extracting duplicated code into some method. Usually I create enum `Direction` and store such values as `.row`, `.column` or `.grid` there. This helps to determine which direction should be chosen if I reuse the same method `findElement` for all strategies.
 
-The further move to increase the code health of your automated framework is the proper object oriented design. It can be achieved by implementing well-known test automation patters, like [Page Object Pattern]((https://alexilyenko.github.io/xcuitest-page-object/).
+The further move to increase the code health of your automated framework is the proper object oriented design. It can be achieved by implementing well-known test automation patters, like [Page Object Pattern](https://alexilyenko.github.io/xcuitest-page-object/).
 
 You may already know, that it’s essential to parallel tests to perform more of them in a tighter window, get feedback earlier and release faster. So another thing on the road to successful automation would be simultaneous run of XCUITests on multiple tvOS devices. I will explain how to do that in one of my next posts.
 

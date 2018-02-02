@@ -90,7 +90,7 @@ There are only two classes in UiAutomator which are able to utilize `Condition` 
 `UiObject` and `UiObject2` are two different classes. Unlike first version `UiObject2` can be used even if underlying view object is terminated. If you're using UiAutomator2, I advice you to use only the second version since all the new APIs support it.
 {: .notice--info}
 
-In the given examples UiAutomator will wait for some condition to be satisfied during `DEFAULT_TIMEOUT` of type `Long`. It will poll every **1 second** and check if condition is equal to `true`. For now polling time is a constant and can not be changed, but hopefully Google team will change that in future releases. If condition is not satisfied during the timeout, it will throw the `TimeoutException`.
+In the given examples UiAutomator will wait for some condition to be satisfied during `DEFAULT_TIMEOUT` of type `Long`. It will poll every **1 second** and check if condition is equal to `true`. For now polling time is a constant and can not be changed, but hopefully Google team will change that in future releases. If condition is not satisfied during the timeout, the element will be equal to `null`.
 
 Basically that's all you need to know to start using waits in UiAutomator. In the next [article](https://alexilyenko.github.io/uiautomator-page-object/) I explained where you can utilize them in your framework building successful Android automation.
 
