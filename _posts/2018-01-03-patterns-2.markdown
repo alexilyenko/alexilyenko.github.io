@@ -1,0 +1,268 @@
+---
+title: "Design Patterns in Test Automation II"
+excerpt: "Data Patterns in Test Automation and Development"
+comments: true
+related: true
+header:
+    overlay_filter: 0.25
+date: 2018-01-03
+tags:
+  - automation
+---
+{% include toc title="Design Patterns in Test Automation II" icon="file-text" %}
+
+
+In the previous post we discussed [Structural Patterns in Test Automation](https://alexilyenko.github.io/patterns-1/), which are very valuable for building robust and scalable test frameworks and tools. In this post we'll talk about Data Patterns.
+
+## Data Patterns
+The main goal of data patterns is to split data and test logic as well as to reduce boilerplate and code duplication in our tests. It should make them more understandable and easier in maintenance for anyone who works with them.
+
+## Value Object
+We will start from the easiest pattern in this group - Value Object. I think most of us used it once in a while, but unfortunately I've seen lots of the projects, where this best practice is neglected by developers. That's really sad because from design perspective Value Object can make your code more readable and significantly reduce amount of repeatable constructions.
+```java
+public void createUser(String firstName, String lastName,
+  int age, boolean isMarried, List<String> accomplishments) {
+ enter(firstName, into("name"));
+ enter(lastName, into("lastName"));
+ enter(age, into("age"));
+ enterMaritalStatus(isMarried);
+ accomplishments.forEach(this::addAccomplishment);
+}
+```
+{% include figure image_path="/assets/images/arrow.png"%}
+```java
+public void createUser(User user) {
+ enter(user.firstName, into("name"));
+ enter(user.lastName, into("lastName"));
+ enter(user.age, into("age"));
+ enterMaritalStatus(user.isMarried);
+ user.accomplishments.forEach(this::addAccomplishment);
+}
+```
+I'd explain the pattern this way. If we have multiple objects which have some common logic (in the case above `createUser` accepts five parameters - first name, last name, age, marital status etc), it's better to merge them in one entity. In this case `User`  will be our Value Object, which aggregates all needed information about actual user into it.
+
+Why do we call it "Value Object"? Because it's immutable (it cannot be changed once it's created) and its main purpose is to deliver data from point A to point B avoiding side effects including modifications and extensions.
+
+To ease the process of creation of such objects you could use additional libraries, like [Lombok](https://projectlombok.org/) in case you're working with Java, or leverage built-in language features, like data classes in Kotlin. These tools will create needed constructors, generate getters for all fields and finalize them afterwards without any manual work from your side.
+
+Data class example in Kotlin containing constructor and getters for all four parameters:
+```kotlin
+data class User(val firstName: String,
+  val firstName: lastName, val age: Int,
+  val isMarried: Boolean,
+  val accomplishments: List<String>)
+```
+
+## Builder
+Let's imaging we have extremely complex object and it can be configured in many different ways. The first option which comes to mind is to create as many types of constructors as we have parameter variations in this object and every time we meet new one we'd need to create new constructor for that. As a result we'll get crazy amount of constructors which will definitely confuse the end-user of the framework.
+Builder pattern is used to make the process of building such objects easier and with the help of modern IDE hints more intuitive.
+
+Here is the example of Builder pattern usage:
+```java
+Server server = Server.runtimeBuilder()
+  .withUrl("http://localhost")
+  .withPort(1234)
+  .withoutLogging()
+  .withResponsesEnqueued(new Response())
+  .build();
+```
+At the beginning the special `ServerBuilder` object is created and after that it can be configured before actual `Server` object is built. That said only `build` method returns the actual `Server` object, other ones return the original `ServerBuilder` for further configuration.
+
+Under the hood it would look something like this:
+```java
+public class Server {
+ private final String url;
+ private final int port;
+ private final List<Response> responseQueue;
+ private final boolean isLoggingEnabled;
+
+ private Server(String url, int port, List<Response> responseQueue, boolean isLoggingEnabled) {
+  this.url = url;
+  this.port = port;
+  this.responseQueue = responseQueue;
+  this.isLoggingEnabled = isLoggingEnabled;
+ }
+
+ public static ServerBuilder runtimeBuilder() {
+   return new ServerBuilder();
+ }
+
+ public static class ServerBuilder {
+   private String url = "http://10.0.0.0"
+   private final int port = 6767;
+   private final List<Response> responseQueue = new ArrayList<>();
+   private final boolean isLoggingEnabled = true;
+
+   public Server build() {
+     return new Server(url, port, responseQueue, isLoggingEnabled);
+   }
+
+   public ServerBuilder withUrl(String url) {
+     this.url = url;
+     return this;
+   }
+
+   public ServerBuilder withPort(int port) {
+     this.port = port;
+     return this;
+   }
+
+   public ServerBuilder withResponsesEnqueued(Response...
+                                               responses) {
+     this.responseQueue.clear();
+     for (Response response : responses) {
+      this.responseQueue.add(response);
+     }
+     return this;
+   }
+
+   public ServerBuilder withoutLogging() {
+     this.isLoggingEnabled = false;
+     return this;
+   }
+ }
+ ...
+}
+}
+```
+In the example above all the parameters have default values when `ServerBuilder` is created, which means user can create `Server` object without having to set up anything. This might be changed as well if we want our object to have mandatory configurable fields. In that case I'd throw exception saying that object is not fully configured.
+{: .notice--info}
+
+## Assert Object/Matchers
+Majority of the people heard about the next pattern but I've seen only few actually using it. Its name is "Assert Object" or simply Matcher. Usually it might be used whenever we need to do domain specific assertions on some object. Let's take a look at the example below:
+
+```java
+@Test
+public void onlyOneResponseWithErrorCodeShouldBeReturned() {
+ List<Response> responses = server.getResponses();
+ assertEquals(1, responses.size());
+ Response response = responses.get(0);
+ assertEquals(ResponseCode.ERROR_403, response.getCode());
+}
+```
+{% include figure image_path="/assets/images/arrow.png"%}
+```java
+@Test
+public void onlyOneResponseWithErrorCodeShouldBeReturned() {
+ assertThat(server).hadSingleResponseWithCode(
+                                   ResponseCode.ERROR_403);
+}
+
+public static ServerAssert assertThat(Server server) {
+ return new ServerAssert(server);
+}
+
+public class ServerAssert {
+ private final Server server;
+ public ServerAssert(Server server) {
+  this.server = server;
+ }
+
+ public void hadSingleResponseWithCode(ResponseCode
+                                            responseCode) {
+   List<Response> responses = server.getResponses();
+   assertEquals(1, responses.size());
+   Response response = responses.get(0);
+   assertEquals(responseCode, response.getCode());
+ }
+}
+```
+In the original example we do not see obvious logic of the checks in the test. It might be not clear to the user what exactly is going to be verified. At first we're validating that server returns only one response and then that the response has 403 error code. We have to split these checks to two separate assertions because otherwise it would be difficult to understand what went wrong. But for someone not familiar with our domain it would be still difficult to understand test like that.
+
+Matcher pattern helps us to create asserts as reusable constructions, which reduce overall code duplication. For instance, if we need to verify that server returns one response, but with 200 response code.
+
+Besides that this approach creates domain logic in our tests. That's why I prefer to implement it the way shown above, when we create group of asserts and put them together in separate class (e.g. `ServerAssert`), which is responsible for all possible checks on the `Server` object. Then all we need to do is to create static method `assertThat` accepting `Server` object and returning `ServerAssert` instead. It looks great and can be read much easier than before and the assertion code underneath stays the same.
+
+Another option for creating matchers is to build static methods for each of them. There are multiple libraries out there which already have a lot of ready-to-use matchers bundled in and provide easy-to-use API for creating your own ones. The most popular of them are [Hamcrest](http://hamcrest.org/) and [AssertJ](http://joel-costigliola.github.io/assertj/). If you haven't used them before I suggest at least to pay attention to those ones and think about building them into your framework. Again, they won't have your domain specific Matchers, but they might significantly simplify creating ones.
+{: .notice--info}
+
+## Data Registry
+The next pattern is interesting one. The main approach is as follows: we want our tests to be independent and try to split our test data across them, but as a result we get completely opposite. For example, test A uses user1, user2 and user3 and they are hardcoded as a test data. This might be the problem since we want completely independent tests, right? But we force other test to be aware that user1, user2 and user3 are already occupied by test A. Another concern is that developer not familiar with this could use those users in other tests and this may cause the issues.
+
+Data registry allows us to generate unique data and avoid duplications. In the example below I'm using the simplest approach possible: on every `getUser` invocation static thread-safe counter will be incremented by 1, guaranteeing that each time unique user is created.
+
+```java
+public static class UserRegistry {
+ private static AtomicInteger COUNTER = new AtomicInteger(0);
+
+ public static getUser() {
+  int index = COUNTER.incrementAndGet();
+  return new User("User_" + index, index);
+ }
+}
+```
+
+In your case the pattern logic might be much more complex, e.g. the registry could take the user from database, file, predefined data set etc. But the outcome will be the same: your tests will be truly independent, since each time they use UserRegistry they  get exclusive user avoiding test interception issues.
+
+## Object Pool / Flyweight
+The next pattern is used by even less developers. Flyweight is the classic pattern from GoF book, which solves the problem of retaining and operating with the heavy in terms of resources objects or set of objects. Instead of creating them every time we need them, we take them, use them and return them to so called Pool for future uses.
+```java
+private final UserPool USER_POOL = new UserPool();
+private User user;
+
+@Before
+public void setUp() {
+ user = USER_POOL.getAvailableUser();
+}
+
+@Test
+public void userShouldBeAbleToLogin() {
+ HomePage homePage = loginPage().loginAs(user);
+ assertThat(homePage.getUsername(), is(user.getName()))
+}
+
+@After
+public void tearDown() {
+  USER_POOL.releaseUser(user);
+}
+```
+Using this pattern we could implement lots of interesting things, for instance, browser pool. I heard quiet a few complains from different people that web-tests take crazy amounts of time, because they require to start browser, load first page, import user profiles etc. But it's not necessarily to create browser in the actual test, instead we could use Background Pool, which set up to retain needed amount of "hot" browsers. After we're done with the browser we just return it to the pool and clear its data. And this might be done in background, in parallel with the actual test threads. And only after browser is ready to be used again it can be given back to the next test as a fresh instance.
+
+That said, this pool configuration and browser set up parts might be taken out outside of the test, significantly minimizing the time and resources spent on it.
+
+The other example is the page usage. You don't have to wait until the needed page is opened, if all of the tests start from the same page. You could have the Page Pool as well and request it from there. This means it's gonna be opened in one of the browser instances in background beforehand and will be waiting for the test to pick it up in ready-to-use state.
+
+Another well-known option for using this approach would be Database Pool. Instead of working with the real database, we could start the needed number of database containers on the different ports (it can be done with Docker or other virtualization tool) and "kill" it after we do not need it anymore. That way we'd always have clean database without the need of tearing it down, cleaning it up, collection and uploading the data etc.
+
+## Data Provider
+Data Provider is one of the most widely used data patterns among test engineers. If you want to implement Data-Driven tests and are willing to run the same test logic on multiple sets of data, you could load the data from outer sources (like Excel or CVS table), remote services or hardcode them in-place.
+
+```java
+@DataProvider
+private static Object[][] testDataProvider() {
+ try {
+  return ReadExcelSheet.getTableArray(
+     "src/main/resources/TestData.xls");
+ } catch (Exception e) {
+  return null;
+ }
+}
+```
+This could be done in the way I showed above by reading from source and returning untyped data (simple array of arrays or strings). But modern approach would be to utilize [Value Object pattern](https://alexilyenko.github.io/patterns-2/#value-object), we were talking about previously, and provide data in terms of entities.
+
+```java
+@DataProvider
+private static Iterator<Object[]> devices() {
+ return asList(
+  new Object[] { new Device("iPhone X", Platform.IOS, "11.2") },
+  new Object[] { new Device("iPhone 7 Plus", Platform.IOS, "10.3") },
+  new Object[] { new Device("Google Pixel 2", Platform.ANDROID, "8.0") }  
+ ).iterator();
+}
+
+@Test(dataProvider = "devices")
+public void pageShouldBeOpenedOnDevice(Device device) {
+  startDevice(device);
+  // some test steps
+}
+```
+You need to mark your method with the annotation `dataProvider` or make it parametrized with the help of [JUnit](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests) and make it return the data set for using it in the test. The rest (parsing and iterating) will be done by the framework, all you have to do is to use data as you would use in regular test.
+
+It's important that we used both patterns (Data Provider and Value Object) in one approach, since it helped us to avoid the passing of multiple parameters to method and to make code cleaner and more readable.
+{: .notice--info}
+
+I love using Data Patterns in my automation, they help me to keep my code healthy and handle resources in the most optimized way possible. In case, you're interested in other patterns which might help you in writing clean and robust tests, check out my other posts:
+- [Design Patterns in Test Automation I](https://alexilyenko.github.io/patterns-1/)
+- Design Patterns in Test Automation III (coming soon)
+
+[<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)
