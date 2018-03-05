@@ -9,9 +9,7 @@ header:
     overlay_filter: 0.25
 date: 2017-10-14
 tags:
-  - xctest
   - ios
-  - appletv
 ---
 {% include toc title="Page Object in XCTest UI Tests" icon="file-text" %}
 ## Why Page Object Pattern

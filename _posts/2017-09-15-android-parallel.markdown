@@ -10,7 +10,6 @@ header:
 date: 2017-09-15
 tags:
   - android
-  - androidtv
 ---
 {% include toc title="Parallel Android Tests with Spoon" icon="file-text" %}
 ## Why Spoon?

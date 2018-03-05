@@ -1,13 +1,13 @@
 ---
 title: "Design Patterns in Test Automation I"
-excerpt: "Architecture essentials every Test Developer should know"
+excerpt: "Structural Patterns every Test Developer should know"
 comments: true
 related: true
 header:
     overlay_filter: 0.25
-date: 2017-10-30
+date: 2017-11-13
 tags:
-  - automation
+  - patterns
 ---
 {% include toc title="Design Patterns in Test Automation I" icon="file-text" %}
 ## What's design pattern
@@ -195,7 +195,7 @@ Strategy helps making our test automation framework more flexible and easier in 
 
 That's it for Structural Patterns. I'll make overview of other pattern types in the next articles:
 
-- Design Patterns in Test Automation II (coming soon)
-- Design Patterns in Test Automation III (coming soon)
+- [Design Patterns in Test Automation II](https://alexilyenko.github.io/patterns-2/)
+- [Design Patterns in Test Automation II](https://alexilyenko.github.io/patterns-3/)
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)

@@ -7,7 +7,7 @@ header:
     overlay_filter: 0.25
 date: 2018-01-03
 tags:
-  - automation
+  - patterns
 ---
 {% include toc title="Design Patterns in Test Automation II" icon="file-text" %}
 
@@ -263,6 +263,6 @@ It's important that we used both patterns (Data Provider and Value Object) in on
 
 I love using Data Patterns in my automation, they help me to keep my code healthy and handle resources in the most optimized way possible. In case, you're interested in other patterns which might help you in writing clean and robust tests, check out my other posts:
 - [Design Patterns in Test Automation I](https://alexilyenko.github.io/patterns-1/)
-- Design Patterns in Test Automation III (coming soon)
+- [Design Patterns in Test Automation II](https://alexilyenko.github.io/patterns-3/)
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)

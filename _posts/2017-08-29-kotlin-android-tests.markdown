@@ -10,8 +10,6 @@ header:
 date: 2017-08-29
 tags:
   - android
-  - androidtv
-  - kotlin
 ---
 {% include toc title="Using Kotlin in Android UI Tests" icon="file-text" %}
 ## Why Kotlin?

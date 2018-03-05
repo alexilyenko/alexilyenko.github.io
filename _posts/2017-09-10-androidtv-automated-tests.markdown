@@ -9,8 +9,7 @@ header:
     overlay_filter: 0.25
 date: 2017-09-10
 tags:
-  - uiautomator
-  - androidtv
+  - android
 ---
 {% include toc title="How to test Android TV devices" icon="file-text" %}
 ## Why do we need to test Android TV app

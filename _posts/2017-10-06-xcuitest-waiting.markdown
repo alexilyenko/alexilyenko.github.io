@@ -9,9 +9,7 @@ header:
     overlay_filter: 0.25
 date: 2017-10-06
 tags:
-  - xctest
   - ios
-  - appletv
 ---
 {% include toc title="Explicit waits in XCUITest" icon="file-text" %}
 ## Waiting is Essential

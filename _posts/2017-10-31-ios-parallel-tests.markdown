@@ -10,7 +10,6 @@ header:
 date: 2017-10-30
 tags:
   - ios
-  - tvos
 ---
 {% include toc title="Parallel iOS/tvOS Tests" icon="file-text" %}
 It’s essential to run our tests in parallel to perform more of them in a tighter window, get feedback earlier and release faster. This is especially true for user interface tests which tend to be the most time consuming and flaky group. And Apple has heard our prayers! During the last WWDC the company presented one of the most useful features regarding testing - possibility of running concurrent XCTest sessions on multiple iOS/tvOS devices.

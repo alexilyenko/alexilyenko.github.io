@@ -9,8 +9,7 @@ header:
     overlay_filter: 0.25
 date: 2017-10-21
 tags:
-  - xctest
-  - appletv
+  - ios
 ---
 {% include toc title="Automating Apple TV Apps" icon="file-text" %}
 ## What tool to use?

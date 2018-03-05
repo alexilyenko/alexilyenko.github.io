@@ -9,9 +9,7 @@ header:
     overlay_filter: 0.25
 date: 2017-08-27
 tags:
-  - uiautomator
   - android
-  - androidtv
 ---
 {% include toc title="Waiting in UiAutomator" icon="file-text" %}
 ## Why to wait?
