@@ -8,6 +8,8 @@ header:
 date: 2017-11-13
 tags:
   - patterns
+redirect_to:
+  - https://www.linkedin.com/pulse/design-patterns-test-automation-i-alex-ilyenko/
 ---
 {% include toc title="Design Patterns in Test Automation I" icon="file-text" %}
 ## What's design pattern
@@ -196,6 +198,6 @@ Strategy helps making our test automation framework more flexible and easier in 
 That's it for Structural Patterns. I'll make overview of other pattern types in the next articles:
 
 - [Design Patterns in Test Automation II](https://alexilyenko.github.io/patterns-2/)
-- [Design Patterns in Test Automation II](https://alexilyenko.github.io/patterns-3/)
+- [Design Patterns in Test Automation III](https://alexilyenko.github.io/patterns-3/)
 
 [<img src="{{ site.url }}{{ site.baseurl }}/assets/images/share_message.png" alt="Feel free to share!">](https://alexilyenko.github.io/)
