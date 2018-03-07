@@ -8,8 +8,6 @@ header:
 date: 2017-11-13
 tags:
   - patterns
-redirect_to:
-  - https://www.linkedin.com/pulse/design-patterns-test-automation-i-alex-ilyenko/
 ---
 {% include toc title="Design Patterns in Test Automation I" icon="file-text" %}
 ## What's design pattern
