@@ -149,7 +149,7 @@ Expected results:
 
 Writing test scenarios in this way may help to avoid using of any extra Test Case Management system, since all of the Test Steps, either automated or manual ones, are stored in one place, which is your framework. As a bonus now you can easily track, how many steps are automated, how many of them are broken, who was responsible for their creation etc.
 
-It's pretty simple to write a great test. The other thing is to write dozens of them while the functionality of your app is scaling, the number of people on your project responsible for the tests is growing, without losing the speed of development and avoiding the time wasting on supporting of those tests etc. The latter can be done leveraging the Design Patterns discussed in the [Patterns](http://localhost:4000/tags/#patterns) series in this blog. If you know how and when to use them, your tests will be faster, more effective, more scalable and more reliable.
+It's pretty simple to write a great test. The other thing is to write dozens of them while the functionality of your app is scaling, the number of people on your project responsible for the tests is growing, without losing the speed of development and avoiding the time wasting on supporting of those tests etc. The latter can be done leveraging the Design Patterns discussed in the [Patterns](https://alexilyenko.github.io/tags/#patterns) series in this blog. If you know how and when to use them, your tests will be faster, more effective, more scalable and more reliable.
 - [Design Patterns in Test Automation I](https://alexilyenko.github.io/patterns-1/)
 - [Design Patterns in Test Automation II](https://alexilyenko.github.io/patterns-2/)
 
