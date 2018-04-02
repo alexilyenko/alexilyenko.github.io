@@ -18,7 +18,7 @@ Thus this is generally not a good idea to use the pattern only because you heard
 
 {% include figure image_path="/assets/images/patterns.png" alt="GoF Patterns Classification" caption="GoF Patterns Classification"%}
 
-There has been always a lot of problem in designing software architecture, faced by different people. Some of them came up with the solutions to them and created the patterns. The first ones who did that and classified most of the classic design patterns were the [Gang of Four](https://en.wikipedia.org/wiki/Gang_of_Four). They published the book "Design Patterns", where they showed why, when and how to use every particular known pattern in object oriented programming. Some of the patterns, described in the book, are outdated, some are missing, but the main concept is still the same - if there is a problem, there should be a solution to it.
+There has been always a lot of problem in designing software architecture, faced by different people. Some of them came up with the solutions to them and created the patterns. The first ones who did that and classified most of the classic design patterns were the [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns). They published the book "Design Patterns", where they showed why, when and how to use every particular known pattern in object oriented programming. Some of the patterns, described in the book, are outdated, some are missing, but the main concept is still the same - if there is a problem, there should be a solution to it.
 
 This idea was so great, almost every industry adopted it. Software test automation was not an exception. Today we will talk ones, which are specific to testing and automation.
 
