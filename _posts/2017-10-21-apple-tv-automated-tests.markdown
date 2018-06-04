@@ -116,7 +116,7 @@ extension XCUIElement {
 ```
 If you read my previous post about [XCUITest Basics](https://alexilyenko.github.io/xcuitest-basics/), you already know that each `XCUIElement` has `debugDescription` variable which represents its detailed debugging information. So basically if two elements had same debug description, they would be the same element in terms of the application.
 <figure>
-	<a href="{{ site.url }}{{ site.baseurl }}/assets/images/debugdescription.png"><img src="{{ site.url }}{{ site.baseurl }}/assets/images/debugdescription.png"></a>
+	<a href="{{ site.url }}{{ site.baseurl }}/assets/images/debugdescription.png"><img src="{{ site.url }}{{ site.baseurl }}/assets/images/debugDescription.png"></a>
 	<figcaption>debugDescription output for some button</figcaption>
 </figure>
 But there is one limitation here. Debug description is generated in runtime and most of the contained data elements get ids based on the current system time. They are represented by hexadecimal numbers in the debug information string (e.g. `0x60000018c300`). That's why for successfully comparing of two elements I had to get rid of them using Regex `0x\\S+`.
