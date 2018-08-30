@@ -1,5 +1,6 @@
 ---
-title: "Design Patterns in Test Automation III"
+title: Design Patterns <br />  
+        in Test Automation III
 excerpt: "Technical and Business Involvement Patterns"
 comments: true
 related: true

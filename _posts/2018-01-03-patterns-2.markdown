@@ -1,5 +1,6 @@
 ---
-title: "Design Patterns in Test Automation II"
+title: Design Patterns <br />  
+        in Test Automation II
 excerpt: "Data Patterns in Test Automation and Development"
 comments: true
 related: true
