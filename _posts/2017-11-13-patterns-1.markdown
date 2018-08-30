@@ -1,7 +1,7 @@
 ---
 title: Design Patterns <br />  
         in Test Automation I
-excerpt: "Structural Patterns"
+excerpt: "Structural Patterns in Test Automation Architecture"
 comments: true
 related: true
 header:
