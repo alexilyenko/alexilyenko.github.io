@@ -4,6 +4,7 @@ excerpt: "Technical and Business Involvement Patterns"
 comments: true
 related: true
 header:
+    overlay_image: /assets/images/patterns_header3.png
     overlay_filter: 0.25
 date: 2018-02-28
 tags:

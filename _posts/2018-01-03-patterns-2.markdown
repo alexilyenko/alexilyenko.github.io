@@ -4,6 +4,7 @@ excerpt: "Data Patterns in Test Automation and Development"
 comments: true
 related: true
 header:
+    overlay_image: /assets/images/patterns_header2.jpeg
     overlay_filter: 0.25
 date: 2018-01-03
 tags:
