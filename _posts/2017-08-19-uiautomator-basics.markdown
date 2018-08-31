@@ -10,7 +10,6 @@ header:
 date: 2017-08-19
 toc: true
 toc_label: "UiAutomator Basics"
-toc_icon: "file-text"
 tags:
   - android
 ---
