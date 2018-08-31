@@ -8,6 +8,8 @@ header:
     overlay_image: /assets/images/parallel_run_android.jpg
     overlay_filter: 0.25
 date: 2017-09-15
+toc: true
+toc_label: "Parallel Android Tests with Spoon"
 tags:
   - android
 ---

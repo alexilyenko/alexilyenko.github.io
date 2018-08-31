@@ -8,11 +8,11 @@ header:
     overlay_image: /assets/images/patterns_header1.jpg
     overlay_filter: 0.25
 date: 2018-02-28
+toc: true
+toc_label: "esign Patterns in Test Automation II"
 tags:
   - patterns
 ---
-{% include toc title="Design Patterns in Test Automation III" icon="file-text" %}
-
 I already wrote about using [Structural](https://alexilyenko.github.io/patterns-1/) and [Data Patterns](https://alexilyenko.github.io/patterns-2/) in your automated tests before. That's why if you'd like to learn more, you should check those posts out. In today's last part of the series we'll be talking about Technical and Business Involvement patterns.
 
 ## Technical Patterns

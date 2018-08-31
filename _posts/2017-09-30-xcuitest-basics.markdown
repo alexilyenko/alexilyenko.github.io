@@ -8,10 +8,11 @@ header:
     overlay_image: /assets/images/xctest_basics.jpg
     overlay_filter: 0.25
 date: 2017-09-30
+toc: true
+toc_label: "XCTest UI Testing Basics"
 tags:
   - ios
 ---
-{% include toc title="XCTest UI Testing Basics" icon="file-text" %}
 ## Why XCTest?
 As you may have heard during "Hey Siri" event in 2015 Apple introduced its own interpretation of testing framework, called XCTest (or XCUITest if we're talking about UI testing). I was surprised to find out that even though it has been already 2 years from its release major part of the Test developers are still being skeptical about this framework.
 

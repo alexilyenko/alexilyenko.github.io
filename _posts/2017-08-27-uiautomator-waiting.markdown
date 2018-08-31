@@ -7,11 +7,12 @@ header:
     image: /assets/images/uiautomator_waits_thumbnail.png
     overlay_image: /assets/images/uiautomator_waits.jpg
     overlay_filter: 0.25
+toc: true
+toc_label: "Waiting in UiAutomator"
 date: 2017-08-27
 tags:
   - android
 ---
-{% include toc title="Waiting in UiAutomator" icon="file-text" %}
 ## Why to wait?
 Real-life waiting is hard, and waiting in tests is not an exception. I guess all of us had difficult times, when one test failed just because we forgot about waits. Most of the test engineers use explicit waits in Selenium and similar frameworks and well-aware of their advantages over usual `Thread.sleep()`.
 

@@ -8,12 +8,11 @@ header:
     overlay_image: /assets/images/patterns_header1.jpg
     overlay_filter: 0.25
 date: 2018-01-03
+toc: true
+toc_label: "Design Patterns in Test Automation II"
 tags:
   - patterns
 ---
-{% include toc title="Design Patterns in Test Automation II" icon="file-text" %}
-
-
 In the previous post we discussed [Structural Patterns in Test Automation](https://alexilyenko.github.io/patterns-1/), which are very valuable for building robust and scalable test frameworks and tools. In this post we'll talk about Data Patterns.
 
 ## Data Patterns

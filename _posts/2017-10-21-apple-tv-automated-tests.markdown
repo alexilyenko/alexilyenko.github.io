@@ -8,10 +8,11 @@ header:
     overlay_image: /assets/images/apple_tv.jpg
     overlay_filter: 0.25
 date: 2017-10-21
+toc: true
+toc_label: "Automating Apple TV Apps"
 tags:
   - ios
 ---
-{% include toc title="Automating Apple TV Apps" icon="file-text" %}
 ## What tool to use?
 In my previous post on [Automating Android TV Apps](https://alexilyenko.github.io/androidtv-automated-tests/) we've already discussed fast-growing potential of TV application market and I shared couple of insights on why it's so important to test those. Just to be clear, all of the concepts given there is also applied to Apple TV apps. That's why if you missed the article you may want to go back and read it first.
 

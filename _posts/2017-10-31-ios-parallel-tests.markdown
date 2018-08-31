@@ -8,10 +8,11 @@ header:
     overlay_image: /assets/images/parallel_run_ios.jpg
     overlay_filter: 0.25
 date: 2017-10-30
+toc: true
+toc_label: "Parallel iOS/tvOS Tests"
 tags:
   - ios
 ---
-{% include toc title="Parallel iOS/tvOS Tests" icon="file-text" %}
 It’s essential to run our tests in parallel to perform more of them in a tighter window, get feedback earlier and release faster. This is especially true for user interface tests which tend to be the most time consuming and flaky group. And Apple has heard our prayers! During the last WWDC the company presented one of the most useful features regarding testing - possibility of running concurrent XCTest sessions on multiple iOS/tvOS devices.
 
 From Xcode 9 and later we are able not only to run the same test on different devices simultaneously, but also different set of tests on different devices. Basically Apple introduced **test sharding**. Wonder what is that?

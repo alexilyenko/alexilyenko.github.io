@@ -8,10 +8,11 @@ header:
     overlay_image: /assets/images/android_tv.png
     overlay_filter: 0.25
 date: 2017-09-10
+toc: true
+toc_label: "How to test Android TV devices"
 tags:
   - android
 ---
-{% include toc title="How to test Android TV devices" icon="file-text" %}
 ## Why do we need to test Android TV app
 After Google introduced [Android TV](https://www.android.com/tv/) in 2014 and Apple released its [tvOS](https://www.apple.com/tvos/) in 2015 it became clear that there is an unseen market with great demand coming from our living room. Even though it's still a young one, almost every company is trying to release its own TV app as soon as possible. It's quiet understandable because as they say "the first man gets the oyster, the second man gets the shell".
 

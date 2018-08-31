@@ -8,10 +8,11 @@ header:
     overlay_image: /assets/images/android_kotlin.jpg
     overlay_filter: 0.25
 date: 2017-08-29
+toc: true
+toc_label: "Using Kotlin in Android UI Tests"
 tags:
   - android
 ---
-{% include toc title="Using Kotlin in Android UI Tests" icon="file-text" %}
 ## Why Kotlin?
 If you follow the latest trends in Android world or development in general, you've likely already heard about [Kotlin](https://kotlinlang.org/). It's a programming language, developed by JetBrains company, creator of Android Studio. Among its numerous advantages one can find proper functions, less of boilerplate code, no-overhead null-safety, smart casts and stream-like arrays. If you're wondering what other pros and cons Kotlin has in comparison to Java, check out [official documentation](https://kotlinlang.org/docs/reference/comparison-to-java.html).
 

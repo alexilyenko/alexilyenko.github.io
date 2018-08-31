@@ -8,10 +8,11 @@ header:
     overlay_image: /assets/images/xctest_waits.jpg
     overlay_filter: 0.25
 date: 2017-10-06
+toc: true
+toc_label: "Explicit waits in XCUITest"
 tags:
   - ios
 ---
-{% include toc title="Explicit waits in XCUITest" icon="file-text" %}
 ## Waiting is Essential
 The time of the static content on the Web has long gone. It was replaced by dynamic websites and asynchronous mobile applications. Implicit waits cannot help us anymore in avoiding flaky tests while automating those assets. I wrote the whole article about [Waiting in Android Functional Tests](https://alexilyenko.github.io/uiautomator-waiting/) and I have to say iOS testing is not different. If you want to build fast and reliable automation for your project, you should implement explicit waits in one way or another.
 

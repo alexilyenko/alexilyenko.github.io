@@ -8,10 +8,11 @@ header:
     overlay_image: /assets/images/patterns_header1.jpg
     overlay_filter: 0.25
 date: 2017-11-13
+toc: true
+toc_label: "Design Patterns in Test Automation I"
 tags:
   - patterns
 ---
-{% include toc title="Design Patterns in Test Automation I" icon="file-text" %}
 ## What's design pattern
 
 There is no such thing as "good" or "bad" design pattern. First of all the term "design pattern" was introduced to represent the problem and its optimal solution. That's why if you don't want to use the particular design pattern in development, test automation, etc., it doesn't mean it's bad, wrong or outdated. It just means that the pattern is not applicable to your problem. Otherwise if this pattern resolves similar problem to yours, it's better to take a closer look at it.
