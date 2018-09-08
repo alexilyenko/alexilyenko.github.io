@@ -81,7 +81,7 @@ In this case three different test schemes will be executed on 3 devices of `iPho
 {% include figure image_path="/assets/images/parallel_run_ios.gif" alt="Running different test targets on different iOS devices in parallel" caption="Running different test targets on different iOS devices in parallel"%}
 
 ## Parallel test class run
-Similarly to how we executed test targets in parallel, we are able to run test classes (or even methods) in parallel. `-only-testing` flag will help us in doing that. All we need to do is to specify test class and test scheme it belongs to:
+Similarly to how we executed test targets in parallel, we are able to run test classes (or even methods) in parallel. `-only-testing` flag will help us in doing that. All we need to do is to specify the relative path of the test class:
 
 ```sh
 xcodebuild \
