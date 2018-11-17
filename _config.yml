@@ -16,7 +16,7 @@ baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "alexilyenko/alexilyenko.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 remote_theme             : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : dark
+minimal_mistakes_skin    : default
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 200
 comments:
