@@ -137,8 +137,8 @@ protocol BaseScreen {
 }
 
 extension BaseScreen {
- func findAll(_ type: XCUIElement.`Type`) -> XCUIElementQuery {
-  return XCUIApplication().descendants(matching: type)
+ func findAll(_ type: XCUIElement.ElementType) -> XCUIElementQuery { 
+  return app.descendants(matching: type) 
  }
 }
 ```
