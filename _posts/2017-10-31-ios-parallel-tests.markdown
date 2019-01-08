@@ -13,16 +13,16 @@ toc_label: "Parallel iOS/tvOS Tests"
 tags:
   - ios
 ---
-It’s essential to run our tests in parallel to perform more of them in a tighter window, get feedback earlier and release faster. This is especially true for user interface tests which tend to be the most time consuming and flaky group. And Apple has heard our prayers! During the last WWDC the company presented one of the most useful features regarding testing - possibility of running concurrent XCTest sessions on multiple iOS/tvOS devices.
+It’s essential to run our tests in parallel to perform more of them in a tighter window, get feedback earlier and release faster. This is especially true for user interface tests which tend to be the most time consuming and flaky group. And Apple has heard our prayers! During the last WWDC the company presented one of the most useful features regarding testing, possibility of running concurrent XCTest sessions on multiple iOS/tvOS devices.
 
-From Xcode 9 and later we are able not only to run the same test on different devices simultaneously, but also different set of tests on different devices. Basically Apple introduced **test sharding**. Wonder what is that?
+From Xcode 9 and later we are able to run not only the same test on the different devices simultaneously, but also different sets of the tests on different devices. It means that basically Apple introduced **test sharding**. Wonder what that is?
 
 Say you have two iPhone X devices and 10 tests. Now you can split your test suite into 2 shards (parts) and run 5 tests per each device. In theory it should decrease run time by factor of **_n_**, where **_n_** is the number of shards. More about this concept can be found in one of my previous posts on [Parallel Android Tests](https://alexilyenko.github.io/android-parallel/).
 
 ## Parallel tests on Simulators
 Let's start from easier approach of parallel tests - running them on Simulators. The first question we need to ask ourselves is - how many devices we want to run tests on? You'll be amazed once you know how many concurrent sessions on Simulators were allowed by Apple. According to `xcodebuild` logs - it's **limitless**! Awesome, huh?
 
-The simplest way to run iOS tests on Simulators consists of such steps:
+The simplest way to run iOS tests on Simulators consists of the following steps:
 - Creating additional **_n_** UI test schemes
 - Splitting existing test suite between created schemes
 - Creating additional **_n_** iOS Simulators (optional, if you want to run on different device models)
@@ -47,9 +47,9 @@ Since we want to run different tests on the same device type in parallel, we nee
 </figure>
 
 ## Parallel Test Run
-As I mentioned before there were two options for running iOS/tvOS tests in parallel - **_same test+different devices_** and **_different tests+same device_**.
+As I mentioned before there were two options for running iOS/tvOS tests in parallel: **_same test+different devices_** and **_different tests+same device_**.
 
-### Same tests on different devices
+### Same tests on the different devices
 To run same tests on different devices we would need to include multiple `destination` flags for each device we want to run test scheme on into `xcodebuild test` command:
 ```sh
 xcodebuild \
@@ -61,7 +61,7 @@ xcodebuild \
 In this case our test scheme `SimpleCalculatorUITests` will be executed on `iPhone X` and `iPhone 8` simultaneously.
 {% include figure image_path="/assets/images/same.gif" alt="Running the same test target on different iOS devices in parallel" caption="Running the same test target on different iOS devices in parallel"%}
 
-### Different tests on same device (test sharding)
+### Different tests on the same device (test sharding)
 That's where previously created schemes and additional simulators come in handy. To run different test targets on the same device type we would need to invoke `xcodebuild` for each of them, setting different simulator for run as `destination` value:
 ```sh
 xcodebuild \
@@ -105,7 +105,7 @@ In the example above `MinusTest` and `ResetTest` classes will be run on `iPhone 
 `iPhone X 2` and `MultiplyTest` one on `iPhone X 3`. And all of that will be done in parallel!
 
 ## Auto splitting of tests
-Previous approach is great, but it's not perfect. We can not specify which tests to run manually every time, and even if we could, continuous integration systems are not smart enough to do something like that every time. So the next improvement I came across was auto splitting of test classes equally between available simulators:
+Previous approach is great, but it's not perfect. It's really inconvenient to manually specify which tests to run each time we need to do that, and continuous integration systems are not even smart enough to do something like that. So the next improvement I came across was auto splitting of test classes equally between available simulators:
 ```bash
 #!/usr/bin/env bash
 
