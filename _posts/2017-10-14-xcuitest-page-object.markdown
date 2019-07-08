@@ -16,7 +16,7 @@ tags:
 ## Why Page Object Pattern
 We already discussed the Page (Screen) Object Pattern and why you should consider using it in development of your test automation architecture in [Page Object for Android UI Tests](https://alexilyenko.github.io/uiautomator-page-object/) post. In today's article we won't go into deep, instead I'll shed the light on the key points of using the pattern and share couple of practical examples. But if you're interested in the details don't hesitate to check out my original post about it.
 
-The snippets below are written in Swift, but the concept can be applied to any programming language, including Objective-C. All of the examples can be found in [GiHub Repo](https://github.com/alexilyenko/SimpleIOSCalculator), which contains iOS Calculator application and user interface test suite for the app verification.
+The snippets below are written in Swift, but the concept can be applied to any programming language, including Objective-C. All of the examples can be found in [GiHub Repo](https://github.com/alexilyenko/SimpleIOSCalculator/tree/develop), which contains iOS Calculator application and user interface test suite for the app verification.
 {: .notice--info}
 
 At first let's take a look at the hypothetical example of UI test for calculator app:
@@ -126,7 +126,7 @@ class Calculator: BaseScreen {
  }
 }
 ```
-Complete implementation can be found [here](https://github.com/alexilyenko/SimpleIOSCalculator/blob/master/SimpleCalculatorUITests/PageObject/Screens/Calculator.swift).
+Complete implementation can be found [here](https://github.com/alexilyenko/SimpleIOSCalculator/blob/develop/SimpleCalculatorUITests/PageObject/Screens/Calculator.swift).
 
 The gist above illustrates how usual Page Object class looks like. Pay attention to the variables and methods. All of the UI elements which can be found on the screen (page) are put under variables like `plusButton` or `screen`. This means that in case our Calculator view's elements locators change, we'll have to do minimal work by changing variables here. Besides that all of the methods represent some actions which may be done on the page, like `enter` or `plus`. They will also help us to encapsulate all page specific things (by reducing the code duplication) and help tests to be more readable.
 
