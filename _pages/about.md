@@ -7,7 +7,7 @@ author_profile: false
 ![image-right]({{ site.url }}{{ site.baseurl }}/assets/images/big_avatar.jpg){: .align-right}
 Hey everyone!
 
-My name is Alex. Currently I work as an SDET at Goldman Sachs in New York City. My job responsibilities include automation, testing and continuous integration. The domain I'm working in is Mobile and TV platforms.
+My name is Alex. Currently I work as an Software Engineer, Quality at Lyft in New York City. My job responsibilities include automation, testing and continuous integration. The domain I'm working in is Mobile and TV platforms.
 
 I am passionate about clean code and best practices of development. Besides that I consider myself as an early adopter of technologies and big fan of optimizations.
 
