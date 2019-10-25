@@ -49,7 +49,7 @@ To ease the process of creation of such objects you could use additional librari
 Data class example in Kotlin containing constructor and getters for all four parameters:
 ```kotlin
 data class User(val firstName: String,
-  val firstName: String, val age: Int,
+  val lastName: String, val age: Int,
   val isMarried: Boolean,
   val accomplishments: List<String>)
 ```
