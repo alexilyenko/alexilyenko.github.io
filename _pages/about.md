@@ -7,10 +7,8 @@ author_profile: false
 ![image-right]({{ site.url }}{{ site.baseurl }}/assets/images/big_avatar.jpg){: .align-right}
 Hey everyone!
 
-My name is Alex. Currently I work as an Software Engineer, Quality at Lyft in New York City. My job responsibilities include automation, testing and continuous integration. The domain I'm working in is Mobile and TV platforms.
+I'm Alex and I currently work as a SDET at Lyft. My job responsibilities mostly cover automation, testing and continuous integration in mobile platforms domain.
 
-I am passionate about clean code and best practices of development. Besides that I consider myself as an early adopter of technologies and big fan of optimizations.
+This blog is mainly created to document all the solutions I came to during my day-to-day work. Usually these things might be extremely difficult to google and I truly hope they make someone else's life easier.
 
-This blog is created to document all the solutions I came to during my day-to-day work. Usually these things might be extremely difficult to google and I truly hope they can make someone's life easier. If they do such thing to yours, I will be happy!
-
-Don't hesitate to drop any thoughts in the comment section below posts. Promise, I'll answer to each of them! :beer:
+Don't hesitate to drop any thoughts or suggestions in the comment sections. Cheers! :beer:
