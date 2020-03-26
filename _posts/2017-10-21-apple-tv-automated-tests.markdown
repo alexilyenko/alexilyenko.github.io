@@ -89,8 +89,8 @@ func findInColumn(_ element: XCUIElement) {
    if isEndReached {
     XCTFail("Element \(element) was not" +
           " found in column or could not be focused")                }
-    isEndReached = true
    }
+   isEndReached = true
   }
   print("Element \(element) was found and focused")
   XCUIRemote.shared.press(.select)
